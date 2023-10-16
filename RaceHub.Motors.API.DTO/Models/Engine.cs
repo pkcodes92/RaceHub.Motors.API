@@ -4,31 +4,30 @@
 
 #nullable disable
 
-namespace RaceHub.Motors.API.DTO.Models
+namespace RaceHub.Motors.API.DTO.Models;
+
+using Newtonsoft.Json;
+
+/// <summary>
+/// This class represents the Engine UI entity.
+/// </summary>
+public class Engine
 {
-    using Newtonsoft.Json;
+    /// <summary>
+    /// Gets or sets the id.
+    /// </summary>
+    [JsonProperty("id")]
+    public int Id { get; set; }
 
     /// <summary>
-    /// This class represents the Engine UI entity.
+    /// Gets or sets the engine code.
     /// </summary>
-    public class Engine
-    {
-        /// <summary>
-        /// Gets or sets the id.
-        /// </summary>
-        [JsonProperty("id")]
-        public int Id { get; set; }
+    [JsonProperty("code")]
+    public string Code { get; set; }
 
-        /// <summary>
-        /// Gets or sets the engine code.
-        /// </summary>
-        [JsonProperty("code")]
-        public string Code { get; set; }
-
-        /// <summary>
-        /// Gets or sets the engine description.
-        /// </summary>
-        [JsonProperty("description")]
-        public string Description { get; set; }
-    }
+    /// <summary>
+    /// Gets or sets the engine description.
+    /// </summary>
+    [JsonProperty("description")]
+    public string Description { get; set; }
 }

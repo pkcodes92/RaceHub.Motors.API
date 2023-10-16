@@ -2,19 +2,38 @@
 // Copyright (c) RaceHub. All rights reserved.
 // </copyright>
 
-namespace RaceHub.Motors.API.DTO
+#nullable disable
+
+namespace RaceHub.Motors.API.DTO;
+
+using Newtonsoft.Json;
+
+/// <summary>
+/// This class represents the country UI entity.
+/// </summary>
+public class Country
 {
     /// <summary>
-    /// This class represents the country UI entity.
+    /// Gets or sets the name.
     /// </summary>
-    public class Country
-    {
-        public string Name { get; set; }
+    [JsonProperty("name")]
+    public string Name { get; set; }
 
-        public string Region { get; set; }
+    /// <summary>
+    /// Gets or sets the region.
+    /// </summary>
+    [JsonProperty("region")]
+    public string Region { get; set; }
 
-        public string CountryCode { get; set; }
+    /// <summary>
+    /// Gets or sets the country code.
+    /// </summary>
+    [JsonProperty("countryCode")]
+    public string CountryCode { get; set; }
 
-        public string Flag { get; set; }
-    }
+    /// <summary>
+    /// Gets or sets the flag image URL.
+    /// </summary>
+    [JsonProperty("flag")]
+    public string Flag { get; set; }
 }

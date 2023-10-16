@@ -20,6 +20,10 @@ namespace RaceHub.Motors.API.DAL.Context
 
         public virtual DbSet<Manufacturer> Manufacturers { get; set; }
 
+        public virtual DbSet<Vehicle> Vehicles { get; set; }
+
+        public virtual DbSet<VehicleType> VehicleTypes { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Drivetrain>(entity =>
@@ -133,6 +137,37 @@ namespace RaceHub.Motors.API.DAL.Context
                 entity.Property(e => e.Region).IsRequired().HasMaxLength(10).IsUnicode(false);
                 entity.Property(e => e.LastUpdBy).IsRequired().HasMaxLength(50).IsUnicode(false).HasDefaultValueSql("(suser_sname())");
                 entity.Property(e => e.LastUpdApp).IsRequired().HasMaxLength(50).IsUnicode(false).HasDefaultValueSql("(app_name())");
+            });
+
+            modelBuilder.Entity<Vehicle>(entity =>
+            {
+                entity.HasKey(e => e.Id).HasName("PK__Vehicle__3214EC0759A04D38");
+
+                entity.ToTable("Vehicle", "Vehicle");
+
+                entity.Property(e => e.Created).HasDefaultValueSql("(getdate())");
+                entity.Property(e => e.CreatedBy).IsRequired().HasMaxLength(50).IsUnicode(false).HasDefaultValueSql("(suser_sname())");
+                entity.Property(e => e.LastUpd).HasDefaultValueSql("(getdate())");
+                entity.Property(e => e.LastUpdBy).IsRequired().HasMaxLength(50).IsUnicode(false).HasDefaultValueSql("(suser_sname())");
+                entity.Property(e => e.LastUpdApp).IsRequired().HasMaxLength(50).IsUnicode(false).HasDefaultValueSql("(app_name())");
+                entity.Property(e => e.VehImage).IsRequired().IsUnicode(false);
+                entity.Property(e => e.TypeCode).IsRequired().IsUnicode(false);
+                entity.Property(e => e.VehYear).IsRequired();
+            });
+
+            modelBuilder.Entity<VehicleType>(entity =>
+            {
+                entity.HasKey(e => e.Id).HasName("PK__VehicleT__3214EC073EBFD425");
+
+                entity.ToTable("VehicleType", "Vehicle");
+
+                entity.Property(e => e.TypeCode).IsRequired().HasMaxLength(5).IsUnicode(false);
+                entity.Property(e => e.Created).HasDefaultValueSql("(getdate())");
+                entity.Property(e => e.CreatedBy).IsRequired().HasMaxLength(50).IsUnicode(false).HasDefaultValueSql("(suser_sname())");
+                entity.Property(e => e.Description).IsRequired().HasMaxLength(50).IsUnicode(false);
+                entity.Property(e => e.LastUpd).HasDefaultValueSql("(getdate())");
+                entity.Property(e => e.LastUpdApp).IsRequired().HasMaxLength(50).IsUnicode(false).HasDefaultValueSql("(app_name())");
+                entity.Property(e => e.LastUpdBy).IsRequired().HasMaxLength(50).IsUnicode(false).HasDefaultValueSql("(suser_sname())");
             });
 
             OnModelCreatingPartial(modelBuilder);

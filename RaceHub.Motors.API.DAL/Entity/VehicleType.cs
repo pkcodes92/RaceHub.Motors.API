@@ -1,4 +1,4 @@
-﻿// <copyright file="Drivetrain.cs" company="RaceHub">
+﻿// <copyright file="VehicleType.cs" company="RaceHub">
 // Copyright (c) RaceHub. All rights reserved.
 // </copyright>
 
@@ -7,19 +7,19 @@
 namespace RaceHub.Motors.API.DAL.Entity;
 
 /// <summary>
-/// This class represents the Drivetrain entity.
+/// This class represents the vehicle type entity.
 /// </summary>
-public class Drivetrain
+public class VehicleType
 {
     /// <summary>
-    /// Gets or sets the drivetrain ID - the primary key.
+    /// Gets or sets the ID - the primary key.
     /// </summary>
     public int Id { get; set; }
 
     /// <summary>
-    /// Gets or sets the code of the drivetrain.
+    /// Gets or sets the type code.
     /// </summary>
-    public string Code { get; set; }
+    public string TypeCode { get; set; }
 
     /// <summary>
     /// Gets or sets the description.
@@ -27,27 +27,27 @@ public class Drivetrain
     public string Description { get; set; }
 
     /// <summary>
-    /// Gets or sets the date/time that the drivetrain is created.
+    /// Gets or sets the date/time that the vehicle type is created.
     /// </summary>
     public DateTime Created { get; set; }
 
     /// <summary>
-    /// Gets or sets the date/time that the drivetrain is created.
+    /// Gets or sets the app/user that created the vehicle type.
     /// </summary>
     public string CreatedBy { get; set; }
 
     /// <summary>
-    /// Gets or sets the date/time when the drivetrain was previously updated.
+    /// Gets or sets the date/time that the vehicle type has been updated.
     /// </summary>
     public DateTime LastUpd { get; set; }
 
     /// <summary>
-    /// Gets or sets the user/app that previously updated the drivetrain.
+    /// Gets or sets the app/user that updated the vehicle type.
     /// </summary>
     public string LastUpdBy { get; set; }
 
     /// <summary>
-    /// Gets or sets the app that previously updated the drivetrain.
+    /// Gets or sets the app that previously updated the vehicle type.
     /// </summary>
     public string LastUpdApp { get; set; }
 }

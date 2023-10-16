@@ -16,5 +16,12 @@ namespace RaceHub.Motors.API.DAL.Repository.Interfaces
         /// </summary>
         /// <returns>A unit of execution that contains a list of type <see cref="Manufacturer"/>.</returns>
         Task<List<Manufacturer>> GetAllManufacturersAsync();
+
+        /// <summary>
+        /// This method definition gets the manufacturer by the ID.
+        /// </summary>
+        /// <param name="id">The primary key of the manufacturer DB entity.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="Manufacturer"/>.</returns>
+        Task<Manufacturer> GetManufacturerByIdAsync(int id);
     }
 }

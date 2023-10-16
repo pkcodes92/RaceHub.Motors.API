@@ -34,5 +34,11 @@ namespace RaceHub.Motors.API.DAL.Repository
             var results = await this.context.Manufacturers.ToListAsync();
             return results!;
         }
+
+        public async Task<Manufacturer> GetManufacturerByIdAsync(int id)
+        {
+            var result = await this.context.Manufacturers.FirstOrDefaultAsync(g => g.Id == id);
+            return result!;
+        }
     }
 }

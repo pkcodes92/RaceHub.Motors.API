@@ -4,34 +4,54 @@
 
 #nullable disable
 
-namespace RaceHub.Motors.API.DTO.Models
+namespace RaceHub.Motors.API.DTO.Models;
+
+using Newtonsoft.Json;
+
+/// <summary>
+/// This class represents the Manufacturer UI entity.
+/// </summary>
+public class Manufacturer
 {
-    using Newtonsoft.Json;
+    /// <summary>
+    /// Gets or sets the necessary primary key.
+    /// </summary>
+    [JsonProperty("id")]
+    public int Id { get; set; }
 
     /// <summary>
-    /// This class represents the Manufacturer UI entity.
+    /// Gets or sets the country code.
     /// </summary>
-    public class Manufacturer
-    {
-        [JsonProperty("id")]
-        public int Id { get; set; }
+    [JsonProperty("countryCode")]
+    public string CountryCode { get; set; }
 
-        [JsonProperty("countryCode")]
-        public string CountryCode { get; set; }
+    /// <summary>
+    /// Gets or sets the region.
+    /// </summary>
+    [JsonProperty("region")]
+    public string Region { get; set; }
 
-        [JsonProperty("region")]
-        public string Region { get; set; }
+    /// <summary>
+    /// Gets or sets the flag.
+    /// </summary>
+    [JsonProperty("flag")]
+    public string Flag { get; set; }
 
-        [JsonProperty("flag")]
-        public string Flag { get; set; }
+    /// <summary>
+    /// Gets or sets the logo.
+    /// </summary>
+    [JsonProperty("logo")]
+    public string Logo { get; set; }
 
-        [JsonProperty("logo")]
-        public string Logo { get; set; }
+    /// <summary>
+    /// Gets or sets the country.
+    /// </summary>
+    [JsonProperty("country")]
+    public string Country { get; set; }
 
-        [JsonProperty("country")]
-        public string Country { get; set; }
-
-        [JsonProperty("name")]
-        public string Name { get; set; }
-    }
+    /// <summary>
+    /// Gets or sets the name of the manufacturer.
+    /// </summary>
+    [JsonProperty("name")]
+    public string Name { get; set; }
 }
