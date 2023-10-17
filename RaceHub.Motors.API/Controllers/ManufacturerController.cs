@@ -73,8 +73,8 @@ namespace RaceHub.Motors.API.Controllers
         public async Task<ActionResult> GetAllManufacturerCountriesAsync()
         {
             this.logger.LogInformation("Getting all the countries");
-
             GetCountriesResponse apiResponse;
+
             try
             {
                 var originalResults = await this.manufacturerSvc.GetAllManufacturersAsync();
