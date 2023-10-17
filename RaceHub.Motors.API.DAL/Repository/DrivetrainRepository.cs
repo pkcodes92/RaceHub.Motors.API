@@ -25,12 +25,21 @@ namespace RaceHub.Motors.API.DAL.Repository
             this.context = context;
         }
 
+        /// <summary>
+        /// This method gets all of the drivetrains from the database.
+        /// </summary>
+        /// <returns>A unit of execution that contains a list of type <see cref="Drivetrain"/>.</returns>
         public async Task<List<Drivetrain>> GetAllDrivetrainsAsync()
         {
             var results = await this.context.Drivetrains.ToListAsync();
             return results!;
         }
 
+        /// <summary>
+        /// This method gets a single drivetrain by the primary key.
+        /// </summary>
+        /// <param name="id">The primary key of the drivetrain entity.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="Drivetrain"/>.</returns>
         public async Task<Drivetrain> GetDrivetrainByIdAsync(int id)
         {
             var result = await this.context.Drivetrains.FirstOrDefaultAsync(g => g.Id == id);
