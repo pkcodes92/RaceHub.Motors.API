@@ -27,11 +27,15 @@ namespace RaceHub.Motors.API
             builder.Services.AddTransient<IDrivetrainRepository, DrivetrainRepository>();
             builder.Services.AddTransient<IVehicleColorRepository, VehicleColorRepository>();
             builder.Services.AddTransient<IManufacturerRepository, ManufacturerRepository>();
+            builder.Services.AddTransient<IVehicleRepository, VehicleRepository>();
+            builder.Services.AddTransient<IVehicleTypeRepository, VehicleTypeRepository>();
 
             builder.Services.AddTransient<IEngineService, EngineService>();
             builder.Services.AddTransient<IDrivetrainService, DrivetrainService>();
             builder.Services.AddTransient<IVehicleColorService, VehicleColorService>();
             builder.Services.AddTransient<IManufacturerService, ManufacturerService>();
+            builder.Services.AddTransient<IVehicleTypeService, VehicleTypeService>();
+            builder.Services.AddTransient<IVehicleService, VehicleService>();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
