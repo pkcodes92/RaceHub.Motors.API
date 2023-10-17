@@ -4,20 +4,19 @@
 
 #nullable disable
 
-namespace RaceHub.Motors.API.DTO.Response
-{
-    using Newtonsoft.Json;
-    using RaceHub.Motors.API.DTO.Models;
+namespace RaceHub.Motors.API.DTO.Response;
 
+using Newtonsoft.Json;
+using RaceHub.Motors.API.DTO.Models;
+
+/// <summary>
+/// This class represents the response when getting the manufacturers from the database.
+/// </summary>
+public class GetManufacturersResponse : ApiResponse
+{
     /// <summary>
-    /// This class represents the response when getting the manufacturers from the database.
+    /// Gets or sets the list of manufacturers.
     /// </summary>
-    public class GetManufacturersResponse : ApiResponse
-    {
-        /// <summary>
-        /// Gets or sets the list of manufacturers.
-        /// </summary>
-        [JsonProperty("manufacturers")]
-        public List<Manufacturer> Manufacturers { get; set; }
-    }
+    [JsonProperty("manufacturers")]
+    public List<Manufacturer> Manufacturers { get; set; }
 }

@@ -1,4 +1,4 @@
-﻿// <copyright file="GetVehicleColorResponse.cs" company="RaceHub">
+﻿// <copyright file="AddVehicleColorResponse.cs" company="RaceHub">
 // Copyright (c) RaceHub. All rights reserved.
 // </copyright>
 
@@ -10,12 +10,12 @@ using Newtonsoft.Json;
 using RaceHub.Motors.API.DTO.Models;
 
 /// <summary>
-/// This class represents the response when getting a single Vehicle Color from the database.
+/// This class represents the response when a new vehicle color is added.
 /// </summary>
-public class GetVehicleColorResponse : ApiResponse
+public class AddVehicleColorResponse : ApiResponse
 {
     /// <summary>
-    /// Gets or sets the vehicle color retrieved from the database.
+    /// Gets or sets the newly added vehicle color.
     /// </summary>
     [JsonProperty("vehicleColor")]
     public VehicleColor VehicleColor { get; set; }

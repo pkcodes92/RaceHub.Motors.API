@@ -1,4 +1,4 @@
-﻿// <copyright file="Drivetrain.cs" company="RaceHub">
+﻿// <copyright file="VehicleType.cs" company="RaceHub">
 // Copyright (c) RaceHub. All rights reserved.
 // </copyright>
 
@@ -9,9 +9,9 @@ namespace RaceHub.Motors.API.DTO.Models;
 using Newtonsoft.Json;
 
 /// <summary>
-/// This class represents the Drivetrain UI entity.
+/// This class represents the vehicle type entity.
 /// </summary>
-public class Drivetrain
+public class VehicleType
 {
     /// <summary>
     /// Gets or sets the primary key.
