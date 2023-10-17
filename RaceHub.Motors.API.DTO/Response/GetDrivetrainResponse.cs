@@ -4,20 +4,19 @@
 
 #nullable disable
 
-namespace RaceHub.Motors.API.DTO.Response
-{
-    using Newtonsoft.Json;
-    using RaceHub.Motors.API.DTO.Models;
+namespace RaceHub.Motors.API.DTO.Response;
 
+using Newtonsoft.Json;
+using RaceHub.Motors.API.DTO.Models;
+
+/// <summary>
+/// This class represents the response when the API gets a single drivetrain.
+/// </summary>
+public class GetDrivetrainResponse : ApiResponse
+{
     /// <summary>
-    /// This class represents the response when the API gets a single drivetrain.
+    /// Gets or sets the single drivetrain from the database.
     /// </summary>
-    public class GetDrivetrainResponse : ApiResponse
-    {
-        /// <summary>
-        /// Gets or sets the single drivetrain from the database.
-        /// </summary>
-        [JsonProperty("drivetrain")]
-        public Drivetrain Drivetrain { get; set; }
-    }
+    [JsonProperty("drivetrain")]
+    public Drivetrain Drivetrain { get; set; }
 }

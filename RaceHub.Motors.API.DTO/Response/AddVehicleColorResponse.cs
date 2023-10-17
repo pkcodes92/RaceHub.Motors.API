@@ -4,20 +4,19 @@
 
 #nullable disable
 
-namespace RaceHub.Motors.API.DTO.Response
-{
-    using Newtonsoft.Json;
-    using RaceHub.Motors.API.DTO.Models;
+namespace RaceHub.Motors.API.DTO.Response;
 
+using Newtonsoft.Json;
+using RaceHub.Motors.API.DTO.Models;
+
+/// <summary>
+/// This class represents the response when a new vehicle color is added.
+/// </summary>
+public class AddVehicleColorResponse : ApiResponse
+{
     /// <summary>
-    /// This class represents the response when a new vehicle color is added.
+    /// Gets or sets the newly added vehicle color.
     /// </summary>
-    public class AddVehicleColorResponse : ApiResponse
-    {
-        /// <summary>
-        /// Gets or sets the newly added vehicle color.
-        /// </summary>
-        [JsonProperty("vehicleColor")]
-        public VehicleColor VehicleColor { get; set; }
-    }
+    [JsonProperty("vehicleColor")]
+    public VehicleColor VehicleColor { get; set; }
 }
