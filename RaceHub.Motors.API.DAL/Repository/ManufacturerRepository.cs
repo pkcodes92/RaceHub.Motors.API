@@ -35,6 +35,11 @@ namespace RaceHub.Motors.API.DAL.Repository
             return results!;
         }
 
+        /// <summary>
+        /// This method will get a single manufacturer by the primary key.
+        /// </summary>
+        /// <param name="id">The primary key of the manufacturer entity.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="Manufacturer"/>.</returns>
         public async Task<Manufacturer> GetManufacturerByIdAsync(int id)
         {
             var result = await this.context.Manufacturers.FirstOrDefaultAsync(g => g.Id == id);

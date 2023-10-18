@@ -14,9 +14,14 @@ namespace RaceHub.Motors.API.DAL.Repository.Interfaces
         /// <summary>
         /// This method definition returns all the drivetrains from the database.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A unit of execution that contains a list of type <see cref="Drivetrain"/>.</returns>
         Task<List<Drivetrain>> GetAllDrivetrainsAsync();
 
+        /// <summary>
+        /// This method definition returns a single drivetrain.
+        /// </summary>
+        /// <param name="id">The primary key of the drivetrain entity.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="Drivetrain"/>.</returns>
         Task<Drivetrain> GetDrivetrainByIdAsync(int id);
     }
 }

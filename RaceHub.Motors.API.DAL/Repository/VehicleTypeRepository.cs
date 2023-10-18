@@ -25,6 +25,10 @@ namespace RaceHub.Motors.API.DAL.Repository
             this.context = context;
         }
 
+        /// <summary>
+        /// This method will return all of the vehicle types in the database.
+        /// </summary>
+        /// <returns>A unit of execution that contains a list of type <see cref="VehicleType"/>.</returns>
         public async Task<List<VehicleType>> GetAllVehicleTypesAsync()
         {
             var results = await this.context.VehicleTypes.ToListAsync();
