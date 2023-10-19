@@ -11,6 +11,10 @@ namespace RaceHub.Motors.API.Services.Interfaces
     /// </summary>
     public interface IVehicleTypeService
     {
+        /// <summary>
+        /// This method definition will get all the vehicle types.
+        /// </summary>
+        /// <returns>A unit of execution that contains a list of type <see cref="VehicleType"/>.</returns>
         Task<List<VehicleType>> GetAllVehicleTypesAsync();
     }
 }
