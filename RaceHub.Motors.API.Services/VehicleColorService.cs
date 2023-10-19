@@ -8,6 +8,9 @@ namespace RaceHub.Motors.API.Services
     using RaceHub.Motors.API.DTO.Models;
     using RaceHub.Motors.API.Services.Interfaces;
 
+    /// <summary>
+    /// This class will implement the methods defined in <see cref="IVehicleColorService"/>.
+    /// </summary>
     public class VehicleColorService : IVehicleColorService
     {
         private readonly IVehicleColorRepository vehicleColorRepo;

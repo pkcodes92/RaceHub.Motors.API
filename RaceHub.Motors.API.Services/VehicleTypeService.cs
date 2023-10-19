@@ -24,6 +24,10 @@ namespace RaceHub.Motors.API.Services
             this.vehicleTypeRepo = vehicleTypeRepo;
         }
 
+        /// <summary>
+        /// This method will return all the vehicle types from the database.
+        /// </summary>
+        /// <returns>A unit of execution that contains a list of type of <see cref="VehicleType"/>.</returns>
         public async Task<List<VehicleType>> GetAllVehicleTypesAsync()
         {
             var dbResults = await this.vehicleTypeRepo.GetAllVehicleTypesAsync();
