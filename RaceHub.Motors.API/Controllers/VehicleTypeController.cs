@@ -29,6 +29,10 @@ namespace RaceHub.Motors.API.Controllers
             this.logger = logger;
         }
 
+        /// <summary>
+        /// This method will get all of the various vehicle types from the database.
+        /// </summary>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
         [HttpGet("GetAllVehicleTypes")]
         public async Task<ActionResult> GetAllVehicleTypesAsync()
         {
