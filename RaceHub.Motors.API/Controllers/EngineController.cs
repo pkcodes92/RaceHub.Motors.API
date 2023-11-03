@@ -99,6 +99,11 @@ namespace RaceHub.Motors.API.Controllers
             return this.Ok(apiResponse);
         }
 
+        /// <summary>
+        /// This method will add a new engine to the database.
+        /// </summary>
+        /// <param name="request">The new engine information that is being added.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
         [HttpPost("AddEngine")]
         public async Task<ActionResult> AddEngineAsync(AddEngineRequest request)
         {
