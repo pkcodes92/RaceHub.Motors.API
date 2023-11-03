@@ -23,5 +23,12 @@ namespace RaceHub.Motors.API.DAL.Repository.Interfaces
         /// <param name="id">The primary key of the Engine entity.</param>
         /// <returns>A unit of execution that contains a type of <see cref="Engine"/>.</returns>
         Task<Engine> GetEngineByIdAsync(int id);
+
+        /// <summary>
+        /// This method definition adds a new engine to the database.
+        /// </summary>
+        /// <param name="engine">The new engine being added.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="Engine"/>.</returns>
+        Task<Engine> AddEngineAsync(Engine engine);
     }
 }

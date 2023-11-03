@@ -5,6 +5,7 @@
 namespace RaceHub.Motors.API.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using RaceHub.Motors.API.DTO.Request;
     using RaceHub.Motors.API.DTO.Response;
     using RaceHub.Motors.API.Services.Interfaces;
 
@@ -88,6 +89,37 @@ namespace RaceHub.Motors.API.Controllers
             {
                 this.logger.LogError(ex, "Error getting the engine with ID: {id}", id);
                 apiResponse = new GetEngineResponse
+                {
+                    Engine = null!,
+                    StatusCode = 500,
+                    Success = false,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
+
+        [HttpPost("AddEngine")]
+        public async Task<ActionResult> AddEngineAsync(AddEngineRequest request)
+        {
+            this.logger.LogInformation("Adding the new engine with code: {code}", request.Code);
+            AddEngineResponse apiResponse;
+
+            try
+            {
+                var result = await this.engineSvc.AddEngineAsync(request);
+
+                apiResponse = new AddEngineResponse
+                {
+                    Engine = result,
+                    StatusCode = 200,
+                    Success = true,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error occurred when adding the new engine with the code: {code}", request.Code);
+                apiResponse = new AddEngineResponse
                 {
                     Engine = null!,
                     StatusCode = 500,

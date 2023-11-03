@@ -5,6 +5,7 @@
 namespace RaceHub.Motors.API.Services.Interfaces
 {
     using RaceHub.Motors.API.DTO.Models;
+    using RaceHub.Motors.API.DTO.Request;
 
     /// <summary>
     /// This interface defines all of the methods that interact with the Engine UI entity.
@@ -23,5 +24,12 @@ namespace RaceHub.Motors.API.Services.Interfaces
         /// <param name="id">The primary key of the engine UI entity.</param>
         /// <returns>A unit of execution that contains a type of <see cref="Engine"/>.</returns>
         Task<Engine> GetEngineByIdAsync(int id);
+
+        /// <summary>
+        /// This method definition will add a new engine to the database.
+        /// </summary>
+        /// <param name="request">The new engine information being added.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="Engine"/>.</returns>
+        Task<Engine> AddEngineAsync(AddEngineRequest request);
     }
 }
