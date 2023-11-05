@@ -134,5 +134,41 @@ namespace RaceHub.Motors.API.Controllers
 
             return this.Ok(apiResponse);
         }
+
+        /// <summary>
+        /// This method will update an existing engine in the database.
+        /// </summary>
+        /// <param name="request">The information of the engine to be updated.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
+        [HttpPut("UpdateEngine")]
+        public async Task<ActionResult> UpdateEngineAsync(UpdateEngineRequest request)
+        {
+            this.logger.LogInformation("Updating the engine with the code: {code}", request.Code);
+            UpdateEngineResponse apiResponse;
+
+            try
+            {
+                var result = await this.engineSvc.UpdateEngineAsync(request);
+
+                apiResponse = new UpdateEngineResponse
+                {
+                    Engine = result,
+                    StatusCode = 200,
+                    Success = true,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error occurred while updating the engine with code: {code}", request.Code);
+                apiResponse = new UpdateEngineResponse
+                {
+                    Engine = null!,
+                    StatusCode = 500,
+                    Success = false,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
     }
 }

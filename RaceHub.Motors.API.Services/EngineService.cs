@@ -93,5 +93,33 @@ namespace RaceHub.Motors.API.Services
                 Description = dbResult.Description,
             };
         }
+
+        /// <summary>
+        /// This method will update an existing engine.
+        /// </summary>
+        /// <param name="request">The engine information to be updated.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="DTO.Models.Engine"/>.</returns>
+        public async Task<DTO.Models.Engine> UpdateEngineAsync(UpdateEngineRequest request)
+        {
+            var engineToUpdate = new DAL.Entity.Engine
+            {
+                Code = request.Code,
+                Description = request.Description,
+                Created = DateTime.Now,
+                CreatedBy = "RaceHub-Motors-API",
+                LastUpd = DateTime.Now,
+                LastUpdBy = "RaceHub-Motors-API",
+                LastUpdApp = "RaceHub-Motors-API",
+            };
+
+            var dbResult = await this.engineRepo.UpdateEngineAsync(engineToUpdate);
+
+            return new DTO.Models.Engine
+            {
+                Id = dbResult.Id,
+                Code = dbResult.Code,
+                Description = dbResult.Description,
+            };
+        }
     }
 }

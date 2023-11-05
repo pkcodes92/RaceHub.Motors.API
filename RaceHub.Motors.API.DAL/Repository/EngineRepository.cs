@@ -59,5 +59,13 @@ namespace RaceHub.Motors.API.DAL.Repository
             var result = await this.context.SaveChangesAsync();
             return result > 0 ? engine : null!;
         }
+
+        public async Task<Engine> UpdateEngineAsync(Engine engine)
+        {
+            this.context.ChangeTracker.Clear();
+            this.context.Engines.Update(engine);
+            var result = await this.context.SaveChangesAsync();
+            return result > 0 ? engine : null!;
+        }
     }
 }

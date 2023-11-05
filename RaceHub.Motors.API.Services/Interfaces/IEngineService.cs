@@ -31,5 +31,12 @@ namespace RaceHub.Motors.API.Services.Interfaces
         /// <param name="request">The new engine information being added.</param>
         /// <returns>A unit of execution that contains a type of <see cref="Engine"/>.</returns>
         Task<Engine> AddEngineAsync(AddEngineRequest request);
+
+        /// <summary>
+        /// This method definition will update an existing engine in the database.
+        /// </summary>
+        /// <param name="request">The information to be updated of the existing engine.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="Engine"/>.</returns>
+        Task<Engine> UpdateEngineAsync(UpdateEngineRequest request);
     }
 }
