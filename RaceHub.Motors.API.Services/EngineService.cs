@@ -110,6 +110,7 @@ namespace RaceHub.Motors.API.Services
                 LastUpd = DateTime.Now,
                 LastUpdBy = "RaceHub-Motors-API",
                 LastUpdApp = "RaceHub-Motors-API",
+                Id = request.Id,
             };
 
             var dbResult = await this.engineRepo.UpdateEngineAsync(engineToUpdate);

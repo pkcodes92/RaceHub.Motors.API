@@ -170,5 +170,42 @@ namespace RaceHub.Motors.API.Controllers
 
             return this.Ok(apiResponse);
         }
+
+        /// <summary>
+        /// This method will remove an engine from the database.
+        /// </summary>
+        /// <param name="engineId">The primary key of the engine entity.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
+        [HttpDelete("RemoveEngine")]
+        public async Task<ActionResult> DeleteEngineAsync(int engineId)
+        {
+            this.logger.LogInformation("Removing the engine with primary key: {engineId}", engineId);
+            DeleteEngineResponse apiResponse;
+
+            try
+            {
+                var result = await this.engineSvc.DeleteEngineAsync(engineId);
+
+                apiResponse = new DeleteEngineResponse
+                {
+                    Id = engineId,
+                    StatusCode = 200,
+                    Success = true,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error occurred while deleting the Engine with the primary key: {engineId}", engineId);
+
+                apiResponse = new DeleteEngineResponse
+                {
+                    Id = engineId,
+                    StatusCode = 500,
+                    Success = false,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
     }
 }

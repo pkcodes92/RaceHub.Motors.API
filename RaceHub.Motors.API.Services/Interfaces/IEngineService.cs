@@ -38,5 +38,12 @@ namespace RaceHub.Motors.API.Services.Interfaces
         /// <param name="request">The information to be updated of the existing engine.</param>
         /// <returns>A unit of execution that contains a type of <see cref="Engine"/>.</returns>
         Task<Engine> UpdateEngineAsync(UpdateEngineRequest request);
+
+        /// <summary>
+        /// This method definition will remove an engine from the database.
+        /// </summary>
+        /// <param name="id">The primary key of the engine entity.</param>
+        /// <returns>A boolean value indicating whether the deletion has been successful.</returns>
+        Task<bool> DeleteEngineAsync(int id);
     }
 }
