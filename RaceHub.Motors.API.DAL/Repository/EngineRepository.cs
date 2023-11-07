@@ -47,5 +47,25 @@ namespace RaceHub.Motors.API.DAL.Repository
             var result = await this.context.Engines.FirstOrDefaultAsync(g => g.Id == id);
             return result!;
         }
+
+        /// <summary>
+        /// This method will add a new engine to the database.
+        /// </summary>
+        /// <param name="engine">The new engine being added to the database.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="Engine"/>.</returns>
+        public async Task<Engine> AddEngineAsync(Engine engine)
+        {
+            this.context.Engines.Add(engine);
+            var result = await this.context.SaveChangesAsync();
+            return result > 0 ? engine : null!;
+        }
+
+        public async Task<Engine> UpdateEngineAsync(Engine engine)
+        {
+            this.context.ChangeTracker.Clear();
+            this.context.Engines.Update(engine);
+            var result = await this.context.SaveChangesAsync();
+            return result > 0 ? engine : null!;
+        }
     }
 }
