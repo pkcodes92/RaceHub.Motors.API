@@ -134,5 +134,41 @@ namespace RaceHub.Motors.API.Controllers
 
             return this.Ok(apiResponse);
         }
+
+        /// <summary>
+        /// This method will update an existing drivetrain in the database.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPut("UpdateDrivetrain")]
+        public async Task<ActionResult> UpdateDrivetrainAsync(UpdateDrivetrainRequest request)
+        {
+            this.logger.LogInformation("Updating the drivetrain with the code: {code}", request.Code);
+            UpdateDrivetrainResponse apiResponse;
+
+            try
+            {
+                var result = await this.drivetrainSvc.UpdateDrivetrainAsync(request);
+
+                apiResponse = new UpdateDrivetrainResponse
+                {
+                    Drivetrain = result,
+                    Success = true,
+                    StatusCode = 200,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error occurred while updating the drivetrain with the code: {code}", request.Code);
+                apiResponse = new UpdateDrivetrainResponse
+                {
+                    Drivetrain = null!,
+                    StatusCode = 500,
+                    Success = false,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
     }
 }
