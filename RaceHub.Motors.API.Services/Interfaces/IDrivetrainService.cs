@@ -5,6 +5,7 @@
 namespace RaceHub.Motors.API.Services.Interfaces
 {
     using RaceHub.Motors.API.DTO.Models;
+    using RaceHub.Motors.API.DTO.Request;
 
     /// <summary>
     /// This interface defines methods that interact with the Drivetrain UI entity.
@@ -23,5 +24,12 @@ namespace RaceHub.Motors.API.Services.Interfaces
         /// <param name="id">The primary key of the drivetrain entity.</param>
         /// <returns>A unit of execution that contains a type of <see cref="Drivetrain"/>.</returns>
         Task<Drivetrain> GetDrivetrainByIdAsync(int id);
+
+        /// <summary>
+        /// This method definition for adding a new drivetrain to the database.
+        /// </summary>
+        /// <param name="request">The necessary new information of the drivetrain to be added.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="Drivetrain"/>.</returns>
+        Task<Drivetrain> AddDrivetrainAsync(AddDrivetrainRequest request);
     }
 }

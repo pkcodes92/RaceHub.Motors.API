@@ -6,6 +6,7 @@ namespace RaceHub.Motors.API.Services
 {
     using RaceHub.Motors.API.DAL.Repository.Interfaces;
     using RaceHub.Motors.API.DTO.Models;
+    using RaceHub.Motors.API.DTO.Request;
     using RaceHub.Motors.API.Services.Interfaces;
 
     /// <summary>
@@ -61,6 +62,29 @@ namespace RaceHub.Motors.API.Services
                 Code = dbResult.Code,
                 Description = dbResult.Description,
                 Id = dbResult.Id,
+            };
+        }
+
+        public async Task<Drivetrain> AddDrivetrainAsync(AddDrivetrainRequest request)
+        {
+            var drivetrainEntityToAdd = new DAL.Entity.Drivetrain
+            {
+                Code = request.Code,
+                Description = request.Description,
+                Created = DateTime.Now,
+                CreatedBy = "RaceHub-Motors-API",
+                LastUpd = DateTime.Now,
+                LastUpdBy = "RaceHub-Motors-API",
+                LastUpdApp = "RaceHub-Motors-API",
+            };
+
+            var dbResult = await this.drivetrainRepo.AddDrivetrainAsync(drivetrainEntityToAdd);
+
+            return new Drivetrain
+            {
+                Id = dbResult.Id,
+                Code = dbResult.Code,
+                Description = dbResult.Description,
             };
         }
     }

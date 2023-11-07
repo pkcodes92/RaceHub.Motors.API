@@ -5,6 +5,7 @@
 namespace RaceHub.Motors.API.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using RaceHub.Motors.API.DTO.Request;
     using RaceHub.Motors.API.DTO.Response;
     using RaceHub.Motors.API.Services.Interfaces;
 
@@ -88,6 +89,42 @@ namespace RaceHub.Motors.API.Controllers
             {
                 this.logger.LogError(ex, "Error when getting the drivetrain with the primary key: {id}", id);
                 apiResponse = new GetDrivetrainResponse
+                {
+                    Drivetrain = null!,
+                    StatusCode = 500,
+                    Success = false,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
+
+        /// <summary>
+        /// This method will add a new drivetrain to the database.
+        /// </summary>
+        /// <param name="request">The new drivetrain information to be added.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
+        [HttpPost("AddDrivetrain")]
+        public async Task<ActionResult> AddDrivetrainAsync(AddDrivetrainRequest request)
+        {
+            this.logger.LogInformation("Adding the new drivetrain with code: {code}", request.Code);
+            AddDrivetrainResponse apiResponse;
+
+            try
+            {
+                var result = await this.drivetrainSvc.AddDrivetrainAsync(request);
+
+                apiResponse = new AddDrivetrainResponse
+                {
+                    Drivetrain = result,
+                    Success = true,
+                    StatusCode = 200,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error occurred while adding the drivetrain with the code: {code}", request.Code);
+                apiResponse = new AddDrivetrainResponse
                 {
                     Drivetrain = null!,
                     StatusCode = 500,

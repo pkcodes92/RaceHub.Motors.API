@@ -23,5 +23,12 @@ namespace RaceHub.Motors.API.DAL.Repository.Interfaces
         /// <param name="id">The primary key of the drivetrain entity.</param>
         /// <returns>A unit of execution that contains a type of <see cref="Drivetrain"/>.</returns>
         Task<Drivetrain> GetDrivetrainByIdAsync(int id);
+
+        /// <summary>
+        /// This method definition adds a new drivetrain to the database.
+        /// </summary>
+        /// <param name="drivetrain">The new drivetrain information to add.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="Drivetrain"/>.</returns>
+        Task<Drivetrain> AddDrivetrainAsync(Drivetrain drivetrain);
     }
 }

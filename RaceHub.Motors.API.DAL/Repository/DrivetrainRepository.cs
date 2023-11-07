@@ -45,5 +45,17 @@ namespace RaceHub.Motors.API.DAL.Repository
             var result = await this.context.Drivetrains.FirstOrDefaultAsync(g => g.Id == id);
             return result!;
         }
+
+        /// <summary>
+        /// This method will add a new drivetrain to the database.
+        /// </summary>
+        /// <param name="drivetrain">The new drivetrain information to be added.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="Drivetrain"/>.</returns>
+        public async Task<Drivetrain> AddDrivetrainAsync(Drivetrain drivetrain)
+        {
+            this.context.Drivetrains.Add(drivetrain);
+            var result = await this.context.SaveChangesAsync();
+            return result > 0 ? drivetrain : null!;
+        }
     }
 }
