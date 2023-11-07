@@ -138,8 +138,8 @@ namespace RaceHub.Motors.API.Controllers
         /// <summary>
         /// This method will update an existing drivetrain in the database.
         /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
+        /// <param name="request">The drivetrain information being updated.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
         [HttpPut("UpdateDrivetrain")]
         public async Task<ActionResult> UpdateDrivetrainAsync(UpdateDrivetrainRequest request)
         {
