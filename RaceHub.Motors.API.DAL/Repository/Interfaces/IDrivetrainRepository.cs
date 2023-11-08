@@ -30,5 +30,12 @@ namespace RaceHub.Motors.API.DAL.Repository.Interfaces
         /// <param name="drivetrain">The new drivetrain information to add.</param>
         /// <returns>A unit of execution that contains a type of <see cref="Drivetrain"/>.</returns>
         Task<Drivetrain> AddDrivetrainAsync(Drivetrain drivetrain);
+
+        /// <summary>
+        /// This method definition updates an existing drivetrain in the database.
+        /// </summary>
+        /// <param name="drivetrain">The updated drivetrain information.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="Drivetrain"/>.</returns>
+        Task<Drivetrain> UpdateDrivetrainAsync(Drivetrain drivetrain);
     }
 }

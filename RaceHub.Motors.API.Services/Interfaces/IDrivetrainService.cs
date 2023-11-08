@@ -26,10 +26,17 @@ namespace RaceHub.Motors.API.Services.Interfaces
         Task<Drivetrain> GetDrivetrainByIdAsync(int id);
 
         /// <summary>
-        /// This method definition for adding a new drivetrain to the database.
+        /// This method definition is for adding a new drivetrain to the database.
         /// </summary>
         /// <param name="request">The necessary new information of the drivetrain to be added.</param>
         /// <returns>A unit of execution that contains a type of <see cref="Drivetrain"/>.</returns>
         Task<Drivetrain> AddDrivetrainAsync(AddDrivetrainRequest request);
+
+        /// <summary>
+        /// This method definition is for updating an existing drivetrain in the database.
+        /// </summary>
+        /// <param name="request">The request containing the updated drivetrain information.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="Drivetrain"/>.</returns>
+        Task<Drivetrain> UpdateDrivetrainAsync(UpdateDrivetrainRequest request);
     }
 }

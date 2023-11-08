@@ -65,6 +65,11 @@ namespace RaceHub.Motors.API.Services
             };
         }
 
+        /// <summary>
+        /// This method implementation adds a new drivetrain to the database.
+        /// </summary>
+        /// <param name="request">The new drivetrain information to add.</param>
+        /// <returns>A unit of execution that contains the type of <see cref="Drivetrain"/>.</returns>
         public async Task<Drivetrain> AddDrivetrainAsync(AddDrivetrainRequest request)
         {
             var drivetrainEntityToAdd = new DAL.Entity.Drivetrain
@@ -79,6 +84,33 @@ namespace RaceHub.Motors.API.Services
             };
 
             var dbResult = await this.drivetrainRepo.AddDrivetrainAsync(drivetrainEntityToAdd);
+
+            return new Drivetrain
+            {
+                Id = dbResult.Id,
+                Code = dbResult.Code,
+                Description = dbResult.Description,
+            };
+        }
+
+        /// <summary>
+        /// This method implementation updates an existing drivetrain in the database.
+        /// </summary>
+        /// <param name="request">The necessary information containing the updated drivetrain.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="Drivetrain"/>.</returns>
+        public async Task<Drivetrain> UpdateDrivetrainAsync(UpdateDrivetrainRequest request)
+        {
+            var drivetrainEntityToUpdate = new DAL.Entity.Drivetrain
+            {
+                Id = request.Id,
+                Code = request.Code,
+                Description = request.Description,
+                LastUpd = DateTime.Now,
+                LastUpdApp = "RaceHub-Motors-API",
+                LastUpdBy = "RaceHub-Motors-API",
+            };
+
+            var dbResult = await this.drivetrainRepo.UpdateDrivetrainAsync(drivetrainEntityToUpdate);
 
             return new Drivetrain
             {

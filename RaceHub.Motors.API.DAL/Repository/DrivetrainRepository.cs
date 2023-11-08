@@ -57,5 +57,18 @@ namespace RaceHub.Motors.API.DAL.Repository
             var result = await this.context.SaveChangesAsync();
             return result > 0 ? drivetrain : null!;
         }
+
+        /// <summary>
+        /// This method implementation will update a drivetrain in the database.
+        /// </summary>
+        /// <param name="drivetrain">The updated drivetrain in the database.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="Drivetrain"/>.</returns>
+        public async Task<Drivetrain> UpdateDrivetrainAsync(Drivetrain drivetrain)
+        {
+            this.context.ChangeTracker.Clear();
+            this.context.Drivetrains.Update(drivetrain);
+            var result = await this.context.SaveChangesAsync();
+            return result > 0 ? drivetrain : null!;
+        }
     }
 }
