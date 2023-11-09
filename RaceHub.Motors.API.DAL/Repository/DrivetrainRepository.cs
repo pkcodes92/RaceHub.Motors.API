@@ -70,5 +70,10 @@ namespace RaceHub.Motors.API.DAL.Repository
             var result = await this.context.SaveChangesAsync();
             return result > 0 ? drivetrain : null!;
         }
+
+        public async Task<bool> DeleteDrivetrainAsync(int id)
+        {
+
+        }
     }
 }

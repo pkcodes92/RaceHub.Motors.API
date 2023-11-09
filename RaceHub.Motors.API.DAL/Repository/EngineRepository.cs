@@ -60,6 +60,11 @@ namespace RaceHub.Motors.API.DAL.Repository
             return result > 0 ? engine : null!;
         }
 
+        /// <summary>
+        /// This method will update an engine in the database.
+        /// </summary>
+        /// <param name="engine">The engine information being updated.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="Engine"/>.</returns>
         public async Task<Engine> UpdateEngineAsync(Engine engine)
         {
             this.context.ChangeTracker.Clear();
