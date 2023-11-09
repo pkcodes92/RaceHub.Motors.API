@@ -186,12 +186,24 @@ namespace RaceHub.Motors.API.Controllers
             {
                 var result = await this.engineSvc.DeleteEngineAsync(engineId);
 
-                apiResponse = new DeleteEngineResponse
+                if (result)
                 {
-                    Id = engineId,
-                    StatusCode = 200,
-                    Success = true,
-                };
+                    apiResponse = new DeleteEngineResponse
+                    {
+                        Id = engineId,
+                        StatusCode = 204,
+                        Success = true,
+                    };
+                }
+                else
+                {
+                    apiResponse = new DeleteEngineResponse
+                    {
+                        Id = engineId,
+                        StatusCode = 503,
+                        Success = false,
+                    };
+                }
             }
             catch (Exception ex)
             {

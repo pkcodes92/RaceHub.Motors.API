@@ -72,5 +72,18 @@ namespace RaceHub.Motors.API.DAL.Repository
             var result = await this.context.SaveChangesAsync();
             return result > 0 ? engine : null!;
         }
+
+        /// <summary>
+        /// This method will remove an engine from the database.
+        /// </summary>
+        /// <param name="id">The primary key of the <see cref="Engine"/> entity.</param>
+        /// <returns>A unit of execution that contains a boolean value indicating successful deletion.</returns>
+        public async Task<bool> DeleteEngineAsync(int id)
+        {
+            var engineToDelete = await this.context.Engines.FirstOrDefaultAsync(g => g.Id == id);
+            this.context.Engines.Remove(engineToDelete!);
+            var result = await this.context.SaveChangesAsync();
+            return result > 0;
+        }
     }
 }

@@ -170,5 +170,53 @@ namespace RaceHub.Motors.API.Controllers
 
             return this.Ok(apiResponse);
         }
+
+        /// <summary>
+        /// This method will remove a drivetrain from the database.
+        /// </summary>
+        /// <param name="drivetrainId">The primary key of the Drivetrain entity.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
+        [HttpDelete("DeleteDrivetrain")]
+        public async Task<ActionResult> DeleteDrivetrainAsync(int drivetrainId)
+        {
+            this.logger.LogInformation("Deleting the drivetrain with the primary key: {id}", drivetrainId);
+            DeleteDrivetrainResponse apiResponse;
+
+            try
+            {
+                var result = await this.drivetrainSvc.DeleteDrivetrainAsync(drivetrainId);
+
+                if (result)
+                {
+                    apiResponse = new DeleteDrivetrainResponse
+                    {
+                        Id = drivetrainId,
+                        StatusCode = 204,
+                        Success = true,
+                    };
+                }
+                else
+                {
+                    apiResponse = new DeleteDrivetrainResponse
+                    {
+                        Id = drivetrainId,
+                        StatusCode = 503,
+                        Success = false,
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error occurred while attempting to delete the drivetrain with the primary key: {id}", drivetrainId);
+                apiResponse = new DeleteDrivetrainResponse
+                {
+                    Id = drivetrainId,
+                    StatusCode = 500,
+                    Success = false,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
     }
 }

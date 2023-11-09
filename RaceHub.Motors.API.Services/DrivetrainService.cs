@@ -119,5 +119,16 @@ namespace RaceHub.Motors.API.Services
                 Description = dbResult.Description,
             };
         }
+
+        /// <summary>
+        /// This method implementation removes a drivetrain from the database.
+        /// </summary>
+        /// <param name="id">The primary key of the drivetrain entity.</param>
+        /// <returns>A unit of execution that contains a boolean indicating successful deletion.</returns>
+        public async Task<bool> DeleteDrivetrainAsync(int id)
+        {
+            var result = await this.drivetrainRepo.DeleteDrivetrainAsync(id);
+            return result;
+        }
     }
 }

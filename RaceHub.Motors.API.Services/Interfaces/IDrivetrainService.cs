@@ -38,5 +38,12 @@ namespace RaceHub.Motors.API.Services.Interfaces
         /// <param name="request">The request containing the updated drivetrain information.</param>
         /// <returns>A unit of execution that contains a type of <see cref="Drivetrain"/>.</returns>
         Task<Drivetrain> UpdateDrivetrainAsync(UpdateDrivetrainRequest request);
+
+        /// <summary>
+        /// This method definition removes a drivetrain from the database.
+        /// </summary>
+        /// <param name="id">The primary key of the drivetrain entity.</param>
+        /// <returns>A unit of execution that contains a boolean that indicates successful deletion.</returns>
+        Task<bool> DeleteDrivetrainAsync(int id);
     }
 }
