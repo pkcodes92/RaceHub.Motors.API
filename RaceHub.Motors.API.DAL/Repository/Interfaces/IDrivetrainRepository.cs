@@ -23,5 +23,26 @@ namespace RaceHub.Motors.API.DAL.Repository.Interfaces
         /// <param name="id">The primary key of the drivetrain entity.</param>
         /// <returns>A unit of execution that contains a type of <see cref="Drivetrain"/>.</returns>
         Task<Drivetrain> GetDrivetrainByIdAsync(int id);
+
+        /// <summary>
+        /// This method definition adds a new drivetrain to the database.
+        /// </summary>
+        /// <param name="drivetrain">The new drivetrain information to add.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="Drivetrain"/>.</returns>
+        Task<Drivetrain> AddDrivetrainAsync(Drivetrain drivetrain);
+
+        /// <summary>
+        /// This method definition updates an existing drivetrain in the database.
+        /// </summary>
+        /// <param name="drivetrain">The updated drivetrain information.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="Drivetrain"/>.</returns>
+        Task<Drivetrain> UpdateDrivetrainAsync(Drivetrain drivetrain);
+
+        /// <summary>
+        /// This method definition will delete a drivetrain from the database.
+        /// </summary>
+        /// <param name="id">The primary key of the drivetrain entity.</param>
+        /// <returns>A unit of execution that contains a boolean value indicating successful deletion.</returns>
+        Task<bool> DeleteDrivetrainAsync(int id);
     }
 }

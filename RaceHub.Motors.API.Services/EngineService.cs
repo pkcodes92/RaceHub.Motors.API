@@ -122,5 +122,16 @@ namespace RaceHub.Motors.API.Services
                 Description = dbResult.Description,
             };
         }
+
+        /// <summary>
+        /// This method will remove an engine from the database.
+        /// </summary>
+        /// <param name="id">The primary key of the engine entity.</param>
+        /// <returns>A unit of execution that contains a boolean value indicating successful deletion.</returns>
+        public async Task<bool> DeleteEngineAsync(int id)
+        {
+            var result = await this.engineRepo.DeleteEngineAsync(id);
+            return result;
+        }
     }
 }

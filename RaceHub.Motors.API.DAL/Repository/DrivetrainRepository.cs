@@ -45,5 +45,43 @@ namespace RaceHub.Motors.API.DAL.Repository
             var result = await this.context.Drivetrains.FirstOrDefaultAsync(g => g.Id == id);
             return result!;
         }
+
+        /// <summary>
+        /// This method will add a new drivetrain to the database.
+        /// </summary>
+        /// <param name="drivetrain">The new drivetrain information to be added.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="Drivetrain"/>.</returns>
+        public async Task<Drivetrain> AddDrivetrainAsync(Drivetrain drivetrain)
+        {
+            this.context.Drivetrains.Add(drivetrain);
+            var result = await this.context.SaveChangesAsync();
+            return result > 0 ? drivetrain : null!;
+        }
+
+        /// <summary>
+        /// This method implementation will update a drivetrain in the database.
+        /// </summary>
+        /// <param name="drivetrain">The updated drivetrain in the database.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="Drivetrain"/>.</returns>
+        public async Task<Drivetrain> UpdateDrivetrainAsync(Drivetrain drivetrain)
+        {
+            this.context.ChangeTracker.Clear();
+            this.context.Drivetrains.Update(drivetrain);
+            var result = await this.context.SaveChangesAsync();
+            return result > 0 ? drivetrain : null!;
+        }
+
+        /// <summary>
+        /// This method implementation will remove a drivetrain from the database.
+        /// </summary>
+        /// <param name="id">The primary key of the drivetrain entity.</param>
+        /// <returns>A unit of execution that contains a boolean value indicating successful deletion.</returns>
+        public async Task<bool> DeleteDrivetrainAsync(int id)
+        {
+            var drivetrainToDelete = await this.context.Drivetrains.FirstOrDefaultAsync(g => g.Id == id);
+            this.context.Drivetrains.Remove(drivetrainToDelete!);
+            var result = await this.context.SaveChangesAsync();
+            return result > 0;
+        }
     }
 }

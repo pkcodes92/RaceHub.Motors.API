@@ -5,6 +5,7 @@
 namespace RaceHub.Motors.API.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using RaceHub.Motors.API.DTO.Request;
     using RaceHub.Motors.API.DTO.Response;
     using RaceHub.Motors.API.Services.Interfaces;
 
@@ -90,6 +91,126 @@ namespace RaceHub.Motors.API.Controllers
                 apiResponse = new GetDrivetrainResponse
                 {
                     Drivetrain = null!,
+                    StatusCode = 500,
+                    Success = false,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
+
+        /// <summary>
+        /// This method will add a new drivetrain to the database.
+        /// </summary>
+        /// <param name="request">The new drivetrain information to be added.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
+        [HttpPost("AddDrivetrain")]
+        public async Task<ActionResult> AddDrivetrainAsync(AddDrivetrainRequest request)
+        {
+            this.logger.LogInformation("Adding the new drivetrain with code: {code}", request.Code);
+            AddDrivetrainResponse apiResponse;
+
+            try
+            {
+                var result = await this.drivetrainSvc.AddDrivetrainAsync(request);
+
+                apiResponse = new AddDrivetrainResponse
+                {
+                    Drivetrain = result,
+                    Success = true,
+                    StatusCode = 200,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error occurred while adding the drivetrain with the code: {code}", request.Code);
+                apiResponse = new AddDrivetrainResponse
+                {
+                    Drivetrain = null!,
+                    StatusCode = 500,
+                    Success = false,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
+
+        /// <summary>
+        /// This method will update an existing drivetrain in the database.
+        /// </summary>
+        /// <param name="request">The drivetrain information being updated.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
+        [HttpPut("UpdateDrivetrain")]
+        public async Task<ActionResult> UpdateDrivetrainAsync(UpdateDrivetrainRequest request)
+        {
+            this.logger.LogInformation("Updating the drivetrain with the code: {code}", request.Code);
+            UpdateDrivetrainResponse apiResponse;
+
+            try
+            {
+                var result = await this.drivetrainSvc.UpdateDrivetrainAsync(request);
+
+                apiResponse = new UpdateDrivetrainResponse
+                {
+                    Drivetrain = result,
+                    Success = true,
+                    StatusCode = 200,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error occurred while updating the drivetrain with the code: {code}", request.Code);
+                apiResponse = new UpdateDrivetrainResponse
+                {
+                    Drivetrain = null!,
+                    StatusCode = 500,
+                    Success = false,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
+
+        /// <summary>
+        /// This method will remove a drivetrain from the database.
+        /// </summary>
+        /// <param name="drivetrainId">The primary key of the Drivetrain entity.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
+        [HttpDelete("DeleteDrivetrain")]
+        public async Task<ActionResult> DeleteDrivetrainAsync(int drivetrainId)
+        {
+            this.logger.LogInformation("Deleting the drivetrain with the primary key: {id}", drivetrainId);
+            DeleteDrivetrainResponse apiResponse;
+
+            try
+            {
+                var result = await this.drivetrainSvc.DeleteDrivetrainAsync(drivetrainId);
+
+                if (result)
+                {
+                    apiResponse = new DeleteDrivetrainResponse
+                    {
+                        Id = drivetrainId,
+                        StatusCode = 204,
+                        Success = true,
+                    };
+                }
+                else
+                {
+                    apiResponse = new DeleteDrivetrainResponse
+                    {
+                        Id = drivetrainId,
+                        StatusCode = 503,
+                        Success = false,
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error occurred while attempting to delete the drivetrain with the primary key: {id}", drivetrainId);
+                apiResponse = new DeleteDrivetrainResponse
+                {
+                    Id = drivetrainId,
                     StatusCode = 500,
                     Success = false,
                 };
