@@ -7,6 +7,7 @@ namespace RaceHub.Motors.API.Controllers
     using Microsoft.AspNetCore.Mvc;
     using RaceHub.Motors.API.DAL.Entity;
     using RaceHub.Motors.API.DTO;
+    using RaceHub.Motors.API.DTO.Request;
     using RaceHub.Motors.API.DTO.Response;
     using RaceHub.Motors.API.Services.Interfaces;
 
@@ -108,6 +109,42 @@ namespace RaceHub.Motors.API.Controllers
                 apiResponse = new GetCountriesResponse
                 {
                     Countries = null!,
+                    StatusCode = 500,
+                    Success = false,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
+
+        /// <summary>
+        /// This method will add a new manufacturer to the database.
+        /// </summary>
+        /// <param name="request">The new manufacturer being added to the database.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
+        [HttpPost("AddManufacturer")]
+        public async Task<ActionResult> AddManufacturerAsync(AddManufacturerRequest request)
+        {
+            this.logger.LogInformation("Adding the new manufacturer named: {name}", request.Name);
+            AddManufacturerResponse apiResponse;
+
+            try
+            {
+                var result = await this.manufacturerSvc.AddManufacturerAsync(request);
+
+                apiResponse = new AddManufacturerResponse
+                {
+                    Manufacturer = result,
+                    StatusCode = 200,
+                    Success = true,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error occurred while adding the manufacturer: {name}", request.Name);
+                apiResponse = new AddManufacturerResponse
+                {
+                    Manufacturer = null,
                     StatusCode = 500,
                     Success = false,
                 };
