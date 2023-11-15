@@ -5,7 +5,6 @@
 namespace RaceHub.Motors.API.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using RaceHub.Motors.API.DAL.Entity;
     using RaceHub.Motors.API.DTO;
     using RaceHub.Motors.API.DTO.Request;
     using RaceHub.Motors.API.DTO.Response;
@@ -143,6 +142,38 @@ namespace RaceHub.Motors.API.Controllers
             {
                 this.logger.LogError(ex, "Error occurred while adding the manufacturer: {name}", request.Name);
                 apiResponse = new AddManufacturerResponse
+                {
+                    Manufacturer = null,
+                    StatusCode = 500,
+                    Success = false,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
+
+        [HttpPut("UpdateManufacturer")]
+        public async Task<ActionResult> UpdateManufacturerAsync(UpdateManufacturerRequest request)
+        {
+            this.logger.LogInformation("Updating the manufacturer with the name: {name}", request.Name);
+            UpdateManufacturerResponse apiResponse;
+
+            try
+            {
+                var result = await this.manufacturerSvc.UpdateManufacturerAsync(request);
+
+                apiResponse = new UpdateManufacturerResponse
+                {
+                    Manufacturer = result,
+                    StatusCode = 200,
+                    Success = true,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error occurred while updating the manufacturer with the name: {name}", request.Name);
+
+                apiResponse = new UpdateManufacturerResponse
                 {
                     Manufacturer = null,
                     StatusCode = 500,
