@@ -152,6 +152,11 @@ namespace RaceHub.Motors.API.Controllers
             return this.Ok(apiResponse);
         }
 
+        /// <summary>
+        /// This method will update an existing manufacturer in the database.
+        /// </summary>
+        /// <param name="request">The updated manufacturer request information.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
         [HttpPut("UpdateManufacturer")]
         public async Task<ActionResult> UpdateManufacturerAsync(UpdateManufacturerRequest request)
         {
@@ -176,6 +181,55 @@ namespace RaceHub.Motors.API.Controllers
                 apiResponse = new UpdateManufacturerResponse
                 {
                     Manufacturer = null,
+                    StatusCode = 500,
+                    Success = false,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
+
+        /// <summary>
+        /// This method will remove a manufacturer from the database.
+        /// </summary>
+        /// <param name="id">The primary key of the manufacturer entity.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
+        [HttpDelete("RemoveManufacturer")]
+        public async Task<ActionResult> RemoveManufacturerAsync(int id)
+        {
+            this.logger.LogInformation("Removing the manufacturer with ID: {id}", id);
+            DeleteManufacturerResponse apiResponse;
+
+            try
+            {
+                var result = await this.manufacturerSvc.RemoveManufacturerAsync(id);
+
+                if (result)
+                {
+                    apiResponse = new DeleteManufacturerResponse
+                    {
+                        Id = id,
+                        Success = true,
+                        StatusCode = 200,
+                    };
+                }
+                else
+                {
+                    apiResponse = new DeleteManufacturerResponse
+                    {
+                        Id = id,
+                        StatusCode = 503,
+                        Success = false,
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error occurred while removing the manufacturer with ID: {id}", id);
+
+                apiResponse = new DeleteManufacturerResponse
+                {
+                    Id = id,
                     StatusCode = 500,
                     Success = false,
                 };
