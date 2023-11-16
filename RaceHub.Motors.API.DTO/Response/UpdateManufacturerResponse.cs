@@ -1,4 +1,4 @@
-﻿// <copyright file="UpdateManufacturerRequest.cs" company="RaceHub">
+﻿// <copyright file="UpdateManufacturerResponse.cs" company="RaceHub">
 // Copyright (c) RaceHub. All rights reserved.
 // </copyright>
 
@@ -12,7 +12,7 @@ namespace RaceHub.Motors.API.DTO.Response
     /// <summary>
     /// This class represents the response when a manufacturer is updated.
     /// </summary>
-    public class UpdateManufacturerRequest : ApiResponse
+    public class UpdateManufacturerResponse : ApiResponse
     {
         /// <summary>
         /// Gets or sets the updated manufacturer.
