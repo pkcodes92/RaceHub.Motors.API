@@ -105,8 +105,6 @@ namespace RaceHub.Motors.API.Services
             {
                 Code = request.Code,
                 Description = request.Description,
-                Created = DateTime.Now,
-                CreatedBy = "RaceHub-Motors-API",
                 LastUpd = DateTime.Now,
                 LastUpdBy = "RaceHub-Motors-API",
                 LastUpdApp = "RaceHub-Motors-API",
