@@ -48,5 +48,11 @@ namespace RaceHub.Motors.API.DTO.Request
         /// </summary>
         [JsonProperty("logo")]
         public string Logo { get; set; }
+
+        /// <summary>
+        /// Gets or sets the app name.
+        /// </summary>
+        [JsonProperty("appName")]
+        public string AppName { get; set; }
     }
 }

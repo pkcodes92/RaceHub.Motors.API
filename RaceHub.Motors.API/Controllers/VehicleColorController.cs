@@ -63,5 +63,41 @@ namespace RaceHub.Motors.API.Controllers
 
             return this.Ok(apiResponse);
         }
+
+        /// <summary>
+        /// This method will get a single vehicle color by the ID.
+        /// </summary>
+        /// <param name="id">The primary key of the vehicle color entity.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
+        [HttpGet("GetVehicleColorById")]
+        public async Task<ActionResult> GetVehicleColorByIdAsync(int id)
+        {
+            this.logger.LogError("Retrieving the single vehicle color with the ID: {id}", id);
+            GetVehicleColorResponse apiResponse;
+
+            try
+            {
+                var result = await this.vehicleColorSvc.GetVehicleColorByIdAsync(id);
+
+                apiResponse = new GetVehicleColorResponse
+                {
+                    StatusCode = 200,
+                    Success = true,
+                    VehicleColor = result,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error getting the vehicle color with the ID: {id}", id);
+                apiResponse = new GetVehicleColorResponse
+                {
+                    StatusCode = 500,
+                    Success = false,
+                    VehicleColor = null!,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
     }
 }

@@ -78,10 +78,10 @@ namespace RaceHub.Motors.API.Services
                 Code = request.Code,
                 Description = request.Description,
                 Created = DateTime.Now,
-                CreatedBy = "RaceHub-Motors-API",
+                CreatedBy = request.AppName,
                 LastUpd = DateTime.Now,
                 LastUpdBy = "RaceHub-Motors-API",
-                LastUpdApp = "RaceHub-Motors-API",
+                LastUpdApp = request.AppName,
             };
 
             var dbResult = await this.engineRepo.AddEngineAsync(engineEntityToAdd);
@@ -101,15 +101,14 @@ namespace RaceHub.Motors.API.Services
         /// <returns>A unit of execution that contains a type of <see cref="DTO.Models.Engine"/>.</returns>
         public async Task<DTO.Models.Engine> UpdateEngineAsync(UpdateEngineRequest request)
         {
-            var engineToUpdate = new DAL.Entity.Engine
-            {
-                Code = request.Code,
-                Description = request.Description,
-                LastUpd = DateTime.Now,
-                LastUpdBy = "RaceHub-Motors-API",
-                LastUpdApp = "RaceHub-Motors-API",
-                Id = request.Id,
-            };
+            var engineToUpdate = await this.engineRepo.GetEngineByIdAsync(request.Id);
+
+            engineToUpdate.Code = request.Code;
+            engineToUpdate.Description = request.Description;
+            engineToUpdate.LastUpd = DateTime.Now;
+            engineToUpdate.LastUpdBy = request.AppName;
+            engineToUpdate.LastUpdApp = request.AppName;
+            engineToUpdate.Id = request.Id;
 
             var dbResult = await this.engineRepo.UpdateEngineAsync(engineToUpdate);
 

@@ -174,23 +174,23 @@ namespace RaceHub.Motors.API.Controllers
         /// <summary>
         /// This method will remove an engine from the database.
         /// </summary>
-        /// <param name="engineId">The primary key of the engine entity.</param>
+        /// <param name="id">The primary key of the engine entity.</param>
         /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
         [HttpDelete("RemoveEngine")]
-        public async Task<ActionResult> DeleteEngineAsync(int engineId)
+        public async Task<ActionResult> DeleteEngineAsync(int id)
         {
-            this.logger.LogInformation("Removing the engine with primary key: {engineId}", engineId);
+            this.logger.LogInformation("Removing the engine with primary key: {engineId}", id);
             DeleteEngineResponse apiResponse;
 
             try
             {
-                var result = await this.engineSvc.DeleteEngineAsync(engineId);
+                var result = await this.engineSvc.DeleteEngineAsync(id);
 
                 if (result)
                 {
                     apiResponse = new DeleteEngineResponse
                     {
-                        Id = engineId,
+                        Id = id,
                         StatusCode = 204,
                         Success = true,
                     };
@@ -199,7 +199,7 @@ namespace RaceHub.Motors.API.Controllers
                 {
                     apiResponse = new DeleteEngineResponse
                     {
-                        Id = engineId,
+                        Id = id,
                         StatusCode = 503,
                         Success = false,
                     };
@@ -207,11 +207,11 @@ namespace RaceHub.Motors.API.Controllers
             }
             catch (Exception ex)
             {
-                this.logger.LogError(ex, "Error occurred while deleting the Engine with the primary key: {engineId}", engineId);
+                this.logger.LogError(ex, "Error occurred while deleting the Engine with the primary key: {engineId}", id);
 
                 apiResponse = new DeleteEngineResponse
                 {
-                    Id = engineId,
+                    Id = id,
                     StatusCode = 500,
                     Success = false,
                 };
