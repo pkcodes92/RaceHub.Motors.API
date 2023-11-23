@@ -37,5 +37,12 @@ namespace RaceHub.Motors.API.DAL.Repository.Interfaces
         /// <param name="vehicleColor">The vehicle color being updated.</param>
         /// <returns>A unit of execution that contains a type of <see cref="VehicleColor"/>.</returns>
         Task<VehicleColor> UpdateVehicleColorAsync(VehicleColor vehicleColor);
+
+        /// <summary>
+        /// This method definition removes a vehicle color from the database.
+        /// </summary>
+        /// <param name="id">The primary key of the <see cref="VehicleColor"/> entity.</param>
+        /// <returns>A unit of execution that contains a boolean indicating successful deletion.</returns>
+        Task<bool> DeleteVehicleColorAsync(int id);
     }
 }

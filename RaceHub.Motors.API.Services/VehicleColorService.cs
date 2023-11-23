@@ -119,5 +119,16 @@ namespace RaceHub.Motors.API.Services
                 Description = dbResult.Description,
             };
         }
+
+        /// <summary>
+        /// This method will remove a vehicle color from the database.
+        /// </summary>
+        /// <param name="id">The primary key of the vehicle color entity.</param>
+        /// <returns>A unit of execution that contains a boolean value indicating successful deletion.</returns>
+        public async Task<bool> DeleteVehicleColorAsync(int id)
+        {
+            var dbResult = await this.vehicleColorRepo.DeleteVehicleColorAsync(id);
+            return dbResult;
+        }
     }
 }

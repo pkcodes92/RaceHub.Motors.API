@@ -72,5 +72,18 @@ namespace RaceHub.Motors.API.DAL.Repository
             var result = await this.context.SaveChangesAsync();
             return result > 0 ? vehicleColor : null!;
         }
+
+        /// <summary>
+        /// This method removes the vehicle color from the database.
+        /// </summary>
+        /// <param name="id">The primary key of the <see cref="VehicleColor"/> entity.</param>
+        /// <returns>A unit of execution that contains a boolean to represent successful deletion.</returns>
+        public async Task<bool> DeleteVehicleColorAsync(int id)
+        {
+            var vehicleColorToDelete = await this.context.VehicleColors.FirstOrDefaultAsync(g => g.Id == id);
+            this.context.VehicleColors.Remove(vehicleColorToDelete!);
+            var result = await this.context.SaveChangesAsync();
+            return result > 0;
+        }
     }
 }

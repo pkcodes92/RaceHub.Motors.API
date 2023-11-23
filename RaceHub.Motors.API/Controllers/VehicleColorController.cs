@@ -8,6 +8,7 @@ namespace RaceHub.Motors.API.Controllers
     using RaceHub.Motors.API.DTO.Request;
     using RaceHub.Motors.API.DTO.Response;
     using RaceHub.Motors.API.Services.Interfaces;
+    using System.Reflection.Metadata.Ecma335;
 
     /// <summary>
     /// This controller will have methods that interact with the Vehicle Color entity.
@@ -167,6 +168,54 @@ namespace RaceHub.Motors.API.Controllers
                     StatusCode = 500,
                     Success = false,
                     VehicleColor = null!,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
+
+        /// <summary>
+        /// This method will remove a vehicle color from the database.
+        /// </summary>
+        /// <param name="id">The primary key of the vehicle color entity.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
+        [HttpDelete("RemoveVehicleColor")]
+        public async Task<ActionResult> RemoveVehicleColorAsync(int id)
+        {
+            this.logger.LogInformation("Removing the vehicle color with the ID: {id}", id);
+            DeleteVehicleColorResponse apiResponse;
+
+            try
+            {
+                var result = await this.vehicleColorSvc.DeleteVehicleColorAsync(id);
+
+                if (result)
+                {
+                    apiResponse = new DeleteVehicleColorResponse
+                    {
+                        StatusCode = 204,
+                        Success = true,
+                        Id = id,
+                    };
+                }
+                else
+                {
+                    apiResponse = new DeleteVehicleColorResponse
+                    {
+                        StatusCode = 503,
+                        Success = false,
+                        Id = id,
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error occurred when removing the vehicle color with the ID: {id}", id);
+                apiResponse = new DeleteVehicleColorResponse
+                {
+                    StatusCode = 500,
+                    Success = false,
+                    Id = id,
                 };
             }
 
