@@ -5,6 +5,7 @@
 namespace RaceHub.Motors.API.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using RaceHub.Motors.API.DTO.Request;
     using RaceHub.Motors.API.DTO.Response;
     using RaceHub.Motors.API.Services.Interfaces;
 
@@ -90,6 +91,42 @@ namespace RaceHub.Motors.API.Controllers
             {
                 this.logger.LogError(ex, "Error getting the vehicle color with the ID: {id}", id);
                 apiResponse = new GetVehicleColorResponse
+                {
+                    StatusCode = 500,
+                    Success = false,
+                    VehicleColor = null!,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
+
+        /// <summary>
+        /// This method will add a new vehicle color to the database.
+        /// </summary>
+        /// <param name="request">The new vehicle color being added to the database.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
+        [HttpPost("AddVehicleColor")]
+        public async Task<ActionResult> AddVehicleColorAsync(AddVehicleColorRequest request)
+        {
+            this.logger.LogInformation("Adding a new vehicle color with the code: {code}", request.Code);
+            AddVehicleColorResponse apiResponse;
+
+            try
+            {
+                var result = await this.vehicleColorSvc.AddVehicleColorAsync(request);
+
+                apiResponse = new AddVehicleColorResponse
+                {
+                    StatusCode = 200,
+                    Success = true,
+                    VehicleColor = result,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error occurred when adding the new vehicle color with the code: {code}", request.Code);
+                apiResponse = new AddVehicleColorResponse
                 {
                     StatusCode = 500,
                     Success = false,

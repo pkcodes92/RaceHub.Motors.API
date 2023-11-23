@@ -6,6 +6,7 @@ namespace RaceHub.Motors.API.Services
 {
     using RaceHub.Motors.API.DAL.Repository.Interfaces;
     using RaceHub.Motors.API.DTO.Models;
+    using RaceHub.Motors.API.DTO.Request;
     using RaceHub.Motors.API.Services.Interfaces;
 
     /// <summary>
@@ -56,6 +57,29 @@ namespace RaceHub.Motors.API.Services
         public async Task<VehicleColor> GetVehicleColorByIdAsync(int id)
         {
             var dbResult = await this.vehicleColorRepo.GetVehicleColorByIdAsync(id);
+
+            return new VehicleColor
+            {
+                Id = dbResult.Id,
+                Code = dbResult.Code,
+                Description = dbResult.Description,
+            };
+        }
+
+        public async Task<VehicleColor> AddVehicleColorAsync(AddVehicleColorRequest request)
+        {
+            var vehicleColor = new DAL.Entity.VehicleColor
+            {
+                Code = request.Code,
+                Description = request.Description,
+                Created = DateTime.Now,
+                CreatedBy = request.AppName,
+                LastUpd = DateTime.Now,
+                LastUpdApp = request.AppName,
+                LastUpdBy = request.AppName,
+            };
+
+            var dbResult = await this.vehicleColorRepo.AddVehicleColorAsync(vehicleColor);
 
             return new VehicleColor
             {

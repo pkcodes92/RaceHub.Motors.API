@@ -47,5 +47,17 @@ namespace RaceHub.Motors.API.DAL.Repository
             var results = await this.context.VehicleColors.ToListAsync();
             return results!;
         }
+
+        /// <summary>
+        /// This method adds a new vehicle color to the database.
+        /// </summary>
+        /// <param name="vehicleColor">The new vehicle color being added to the database.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="VehicleColor"/>.</returns>
+        public async Task<VehicleColor> AddVehicleColorAsync(VehicleColor vehicleColor)
+        {
+            this.context.VehicleColors.Add(vehicleColor);
+            var result = await this.context.SaveChangesAsync();
+            return result > 0 ? vehicleColor : null!;
+        }
     }
 }
