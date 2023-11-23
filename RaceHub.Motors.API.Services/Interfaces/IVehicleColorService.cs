@@ -31,5 +31,12 @@ namespace RaceHub.Motors.API.Services.Interfaces
         /// <param name="request">The new vehicle color being added to the database.</param>
         /// <returns>A unit of execution that contains a type of <see cref="VehicleColor"/>.</returns>
         Task<VehicleColor> AddVehicleColorAsync(AddVehicleColorRequest request);
+
+        /// <summary>
+        /// This method definition updates a vehicle color in the database.
+        /// </summary>
+        /// <param name="request">The vehicle color being updated in the database.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="VehicleColor"/>.</returns>
+        Task<VehicleColor> UpdateVehicleColorAsync(UpdateVehicleColorRequest request);
     }
 }

@@ -66,6 +66,11 @@ namespace RaceHub.Motors.API.Services
             };
         }
 
+        /// <summary>
+        /// This method adds a new vehicle color to the database.
+        /// </summary>
+        /// <param name="request">The new vehicle color information.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="VehicleColor"/>.</returns>
         public async Task<VehicleColor> AddVehicleColorAsync(AddVehicleColorRequest request)
         {
             var vehicleColor = new DAL.Entity.VehicleColor
@@ -80,6 +85,32 @@ namespace RaceHub.Motors.API.Services
             };
 
             var dbResult = await this.vehicleColorRepo.AddVehicleColorAsync(vehicleColor);
+
+            return new VehicleColor
+            {
+                Id = dbResult.Id,
+                Code = dbResult.Code,
+                Description = dbResult.Description,
+            };
+        }
+
+        /// <summary>
+        /// This method updates a vehicle color in the database.
+        /// </summary>
+        /// <param name="request">The updated vehicle color information.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="VehicleColor"/>.</returns>
+        public async Task<VehicleColor> UpdateVehicleColorAsync(UpdateVehicleColorRequest request)
+        {
+            var vehicleColorToUpdate = await this.vehicleColorRepo.GetVehicleColorByIdAsync(request.Id);
+
+            vehicleColorToUpdate.Code = request.Code;
+            vehicleColorToUpdate.Description = request.Description;
+            vehicleColorToUpdate.LastUpd = DateTime.Now;
+            vehicleColorToUpdate.LastUpdBy = request.AppName;
+            vehicleColorToUpdate.LastUpdApp = request.AppName;
+            vehicleColorToUpdate.Id = request.Id;
+
+            var dbResult = await this.vehicleColorRepo.UpdateVehicleColorAsync(vehicleColorToUpdate);
 
             return new VehicleColor
             {
