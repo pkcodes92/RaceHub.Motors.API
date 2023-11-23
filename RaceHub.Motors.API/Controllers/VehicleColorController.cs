@@ -136,5 +136,41 @@ namespace RaceHub.Motors.API.Controllers
 
             return this.Ok(apiResponse);
         }
+
+        /// <summary>
+        /// This method will update an existing vehicle color in the database.
+        /// </summary>
+        /// <param name="request">The update vehicle color information.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
+        [HttpPut("UpdateVehicleColor")]
+        public async Task<ActionResult> UpdateVehicleColorAsync(UpdateVehicleColorRequest request)
+        {
+            this.logger.LogInformation("Updating the vehicle color with ID: {id}, and Code: {code}", request.Id, request.Code);
+            UpdateVehicleColorResponse apiResponse;
+
+            try
+            {
+                var result = await this.vehicleColorSvc.UpdateVehicleColorAsync(request);
+
+                apiResponse = new UpdateVehicleColorResponse
+                {
+                    StatusCode = 200,
+                    Success = true,
+                    VehicleColor = result,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error occurred while updating the vehicle color with ID: {id}, and Code: {code}", request.Id, request.Code);
+                apiResponse = new UpdateVehicleColorResponse
+                {
+                    StatusCode = 500,
+                    Success = false,
+                    VehicleColor = null!,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
     }
 }
