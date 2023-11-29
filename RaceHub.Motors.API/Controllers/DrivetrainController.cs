@@ -176,7 +176,7 @@ namespace RaceHub.Motors.API.Controllers
         /// </summary>
         /// <param name="drivetrainId">The primary key of the Drivetrain entity.</param>
         /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
-        [HttpDelete("DeleteDrivetrain")]
+        [HttpDelete("RemoveDrivetrain")]
         public async Task<ActionResult> DeleteDrivetrainAsync(int drivetrainId)
         {
             this.logger.LogInformation("Deleting the drivetrain with the primary key: {id}", drivetrainId);
