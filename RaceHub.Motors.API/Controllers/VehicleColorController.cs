@@ -8,7 +8,6 @@ namespace RaceHub.Motors.API.Controllers
     using RaceHub.Motors.API.DTO.Request;
     using RaceHub.Motors.API.DTO.Response;
     using RaceHub.Motors.API.Services.Interfaces;
-    using System.Reflection.Metadata.Ecma335;
 
     /// <summary>
     /// This controller will have methods that interact with the Vehicle Color entity.
