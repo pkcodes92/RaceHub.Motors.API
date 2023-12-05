@@ -36,6 +36,17 @@ namespace RaceHub.Motors.API.DAL.Repository
         }
 
         /// <summary>
+        /// This method will return all the manufacturers by the country code.
+        /// </summary>
+        /// <param name="countryCode">The country code that is to be searched in the database.</param>
+        /// <returns>A unit of execution that contains a list of type <see cref="Manufacturer"/>.</returns>
+        public async Task<List<Manufacturer>> GetManufacturersByCountryCodeAsync(string countryCode)
+        {
+            var results = await this.context.Manufacturers.Where(g => g.CountryCode == countryCode).ToListAsync();
+            return results!;
+        }
+
+        /// <summary>
         /// This method will get a single manufacturer by the primary key.
         /// </summary>
         /// <param name="id">The primary key of the manufacturer entity.</param>

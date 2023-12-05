@@ -66,6 +66,41 @@ namespace RaceHub.Motors.API.Controllers
         }
 
         /// <summary>
+        /// This method will get all of the manufacturers that belong to a country.
+        /// </summary>
+        /// <param name="countryCode">The country code to search for manufacturers.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
+        [HttpGet("GetManufacturersByCountryCode")]
+        public async Task<ActionResult> GetAllManufacturersByCountryCode(string countryCode)
+        {
+            this.logger.LogInformation("Getting all of the manufacturers in the country: {countryCode}", countryCode);
+            GetManufacturersResponse apiResponse;
+
+            try
+            {
+                var results = await this.manufacturerSvc.GetManufacturersByCountryCodeAsync(countryCode);
+                apiResponse = new GetManufacturersResponse
+                {
+                    Manufacturers = results,
+                    StatusCode = 200,
+                    Success = true,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error getting the manufacturers in the country: {countryCode}", countryCode);
+                apiResponse = new GetManufacturersResponse
+                {
+                    Manufacturers = null!,
+                    StatusCode = 500,
+                    Success = false,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
+
+        /// <summary>
         /// This method will get all the manufacturer countries.
         /// </summary>
         /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>

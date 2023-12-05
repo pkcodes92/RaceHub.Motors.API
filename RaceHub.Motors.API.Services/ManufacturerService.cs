@@ -53,6 +53,30 @@ namespace RaceHub.Motors.API.Services
             return results;
         }
 
+        public async Task<List<Manufacturer>> GetManufacturersByCountryCodeAsync(string countryCode)
+        {
+            var dbResults = await this.manufacturerRepo.GetManufacturersByCountryCodeAsync(countryCode);
+            var results = new List<Manufacturer>();
+
+            foreach (var item in dbResults)
+            {
+                var manufacturer = new Manufacturer
+                {
+                    Id = item.Id,
+                    CountryCode = item.CountryCode,
+                    Region = item.Region,
+                    Flag = item.ManufacturerNationFlag,
+                    Logo = item.ManufacturerLogo,
+                    Country = item.Country,
+                    Name = item.Name,
+                };
+
+                results.Add(manufacturer);
+            }
+
+            return results;
+        }
+
         /// <summary>
         /// This method adds a new manufacturer to the database.
         /// </summary>

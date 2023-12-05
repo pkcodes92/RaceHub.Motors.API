@@ -18,6 +18,13 @@ namespace RaceHub.Motors.API.DAL.Repository.Interfaces
         Task<List<Manufacturer>> GetAllManufacturersAsync();
 
         /// <summary>
+        /// This method definition gets all the manufacturers by the country code.
+        /// </summary>
+        /// <param name="countryCode">The country code to search for.</param>
+        /// <returns>A unit of execution that contains a list of type <see cref="Manufacturer"/>.</returns>
+        Task<List<Manufacturer>> GetManufacturersByCountryCodeAsync(string countryCode);
+
+        /// <summary>
         /// This method definition gets the manufacturer by the ID.
         /// </summary>
         /// <param name="id">The primary key of the manufacturer DB entity.</param>

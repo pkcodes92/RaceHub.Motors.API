@@ -19,6 +19,13 @@ namespace RaceHub.Motors.API.Services.Interfaces
         Task<List<Manufacturer>> GetAllManufacturersAsync();
 
         /// <summary>
+        /// This method definition will get the manufacturers in a country.
+        /// </summary>
+        /// <param name="countryCode">The country code to search for the manufacturers.</param>
+        /// <returns>A unit of execution that contains a list of type <see cref="Manufacturer"/>.</returns>
+        Task<List<Manufacturer>> GetManufacturersByCountryCodeAsync(string countryCode);
+
+        /// <summary>
         /// This method definition will add a new manufacturer to the database.
         /// </summary>
         /// <param name="request">The new manufacturer information being added.</param>
