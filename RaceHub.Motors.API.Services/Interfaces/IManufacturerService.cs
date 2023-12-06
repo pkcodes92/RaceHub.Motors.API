@@ -4,6 +4,7 @@
 
 namespace RaceHub.Motors.API.Services.Interfaces
 {
+    using RaceHub.Motors.API.DTO;
     using RaceHub.Motors.API.DTO.Models;
     using RaceHub.Motors.API.DTO.Request;
 
@@ -24,6 +25,19 @@ namespace RaceHub.Motors.API.Services.Interfaces
         /// <param name="countryCode">The country code to search for the manufacturers.</param>
         /// <returns>A unit of execution that contains a list of type <see cref="Manufacturer"/>.</returns>
         Task<List<Manufacturer>> GetManufacturersByCountryCodeAsync(string countryCode);
+
+        /// <summary>
+        /// This method definition will get all of the manufacturing countries.
+        /// </summary>
+        /// <returns>A unit of execution that contains a list of type <see cref="Country"/>.</returns>
+        Task<List<Country>> GetAllManufacturerCountriesAsync();
+
+        /// <summary>
+        /// This method definition will get a single country.
+        /// </summary>
+        /// <param name="countryCode">The country code to search.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="Country"/>.</returns>
+        Task<Country> GetCountryByCodeAsync(string countryCode);
 
         /// <summary>
         /// This method definition will add a new manufacturer to the database.

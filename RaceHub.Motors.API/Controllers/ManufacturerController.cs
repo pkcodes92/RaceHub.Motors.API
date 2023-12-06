@@ -112,24 +112,7 @@ namespace RaceHub.Motors.API.Controllers
 
             try
             {
-                var originalResults = await this.manufacturerSvc.GetAllManufacturersAsync();
-                var distinctResults = originalResults.DistinctBy(g => g.Country).ToList();
-
-                var results = new List<Country>();
-
-                foreach (var country in distinctResults)
-                {
-                    var itemToAdd = new Country
-                    {
-                        CountryCode = country.CountryCode,
-                        Flag = country.Flag,
-                        Name = country.Country,
-                        Region = country.Region,
-                    };
-
-                    results.Add(itemToAdd);
-                }
-
+                var results = await this.manufacturerSvc.GetAllManufacturerCountriesAsync();
                 apiResponse = new GetCountriesResponse
                 {
                     Countries = results,
@@ -143,6 +126,41 @@ namespace RaceHub.Motors.API.Controllers
                 apiResponse = new GetCountriesResponse
                 {
                     Countries = null!,
+                    StatusCode = 500,
+                    Success = false,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
+
+        /// <summary>
+        /// This method will get a single country by the country code.
+        /// </summary>
+        /// <param name="countryCode">The single country code.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
+        [HttpGet("GetCountryByCode")]
+        public async Task<ActionResult> GetCountryByCode(string countryCode)
+        {
+            this.logger.LogInformation("Getting the country information for: {countryCode}", countryCode);
+            GetCountryResponse apiResponse;
+
+            try
+            {
+                var result = await this.manufacturerSvc.GetCountryByCodeAsync(countryCode);
+                apiResponse = new GetCountryResponse
+                {
+                    Country = result,
+                    StatusCode = 200,
+                    Success = true,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error occurred while trying to get the country by the code: {countryCode}", countryCode);
+                apiResponse = new GetCountryResponse
+                {
+                    Country = null!,
                     StatusCode = 500,
                     Success = false,
                 };

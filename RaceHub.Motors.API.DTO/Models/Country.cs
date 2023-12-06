@@ -4,7 +4,7 @@
 
 #nullable disable
 
-namespace RaceHub.Motors.API.DTO;
+namespace RaceHub.Motors.API.DTO.Models;
 
 using Newtonsoft.Json;
 

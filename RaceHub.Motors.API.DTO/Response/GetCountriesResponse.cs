@@ -7,6 +7,7 @@
 namespace RaceHub.Motors.API.DTO.Response;
 
 using Newtonsoft.Json;
+using RaceHub.Motors.API.DTO.Models;
 
 /// <summary>
 /// This class represents the response when getting the manufacturing countries.

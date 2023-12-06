@@ -53,6 +53,53 @@ namespace RaceHub.Motors.API.Services
             return results;
         }
 
+        /// <summary>
+        /// This method will get all of the manufacturing countries.
+        /// </summary>
+        /// <returns>A unit of execution that contains a list of type <see cref="Country"/>.</returns>
+        public async Task<List<Country>> GetAllManufacturerCountriesAsync()
+        {
+            var dbResults = await this.manufacturerRepo.GetAllManufacturersAsync();
+            var distinctResults = dbResults.DistinctBy(g => g.Country).ToList();
+
+            var results = new List<Country>();
+            foreach (var country in distinctResults)
+            {
+                var itemToAdd = new Country
+                {
+                    CountryCode = country.CountryCode,
+                    Region = country.Region,
+                    Flag = country.ManufacturerNationFlag,
+                    Name = country.Country,
+                };
+
+                results.Add(itemToAdd);
+            }
+
+            return results;
+        }
+
+        public async Task<Country> GetCountryByCodeAsync(string countryCode)
+        {
+            var dbResults = await this.manufacturerRepo.GetAllManufacturersAsync();
+            var distinctResults = dbResults.DistinctBy(g => g.Country).ToList();
+
+            var result = distinctResults.FirstOrDefault(g => g.CountryCode == countryCode);
+
+            return new Country
+            {
+                CountryCode = result?.CountryCode,
+                Region = result?.Region,
+                Flag = result?.ManufacturerNationFlag,
+                Name = result?.Country,
+            };
+        }
+
+        /// <summary>
+        /// This method will get all of the manufacturers that exist in a single country.
+        /// </summary>
+        /// <param name="countryCode">The country code to search.</param>
+        /// <returns>A unit of execution that contains a list of type <see cref="Manufacturer"/>.</returns>
         public async Task<List<Manufacturer>> GetManufacturersByCountryCodeAsync(string countryCode)
         {
             var dbResults = await this.manufacturerRepo.GetManufacturersByCountryCodeAsync(countryCode);
