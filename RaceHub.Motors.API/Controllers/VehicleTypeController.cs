@@ -11,23 +11,18 @@ namespace RaceHub.Motors.API.Controllers
     /// <summary>
     /// This class implements the necessary methods that interact with the Vehicle Type UI entity.
     /// </summary>
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="VehicleTypeController"/> class.
+    /// </remarks>
+    /// <param name="vehicleTypeSvc">The vehicle type service injection.</param>
+    /// <param name="logger">The logging mechanism injection.</param>
     [Route("api/VehicleType")]
     [ApiController]
-    public class VehicleTypeController : ControllerBase
+    public class VehicleTypeController(IVehicleTypeService vehicleTypeSvc, ILogger<VehicleTypeController> logger)
+        : ControllerBase
     {
-        private readonly IVehicleTypeService vehicleTypeSvc;
-        private readonly ILogger<VehicleTypeController> logger;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="VehicleTypeController"/> class.
-        /// </summary>
-        /// <param name="vehicleTypeSvc">The vehicle type service injection.</param>
-        /// <param name="logger">The logging mechanism injection.</param>
-        public VehicleTypeController(IVehicleTypeService vehicleTypeSvc, ILogger<VehicleTypeController> logger)
-        {
-            this.vehicleTypeSvc = vehicleTypeSvc;
-            this.logger = logger;
-        }
+        private readonly IVehicleTypeService vehicleTypeSvc = vehicleTypeSvc;
+        private readonly ILogger<VehicleTypeController> logger = logger;
 
         /// <summary>
         /// This method will get all of the various vehicle types from the database.

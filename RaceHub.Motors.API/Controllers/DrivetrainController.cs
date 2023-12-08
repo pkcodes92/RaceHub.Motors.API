@@ -12,23 +12,18 @@ namespace RaceHub.Motors.API.Controllers
     /// <summary>
     /// This class contains methods that interact witht the Drivetrain UI entity.
     /// </summary>
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="DrivetrainController"/> class.
+    /// </remarks>
+    /// <param name="logger">The logging mechanism injection.</param>
+    /// <param name="drivetrainSvc">The drivetrain service injection.</param>
     [ApiController]
     [Route("api/Drivetrain")]
-    public class DrivetrainController : ControllerBase
+    public class DrivetrainController(ILogger<DrivetrainController> logger, IDrivetrainService drivetrainSvc) 
+        : ControllerBase
     {
-        private readonly ILogger<DrivetrainController> logger;
-        private readonly IDrivetrainService drivetrainSvc;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DrivetrainController"/> class.
-        /// </summary>
-        /// <param name="logger">The logging mechanism injection.</param>
-        /// <param name="drivetrainSvc">The drivetrain service injection.</param>
-        public DrivetrainController(ILogger<DrivetrainController> logger, IDrivetrainService drivetrainSvc)
-        {
-            this.logger = logger;
-            this.drivetrainSvc = drivetrainSvc;
-        }
+        private readonly ILogger<DrivetrainController> logger = logger;
+        private readonly IDrivetrainService drivetrainSvc = drivetrainSvc;
 
         /// <summary>
         /// This method will get all the drivetrains from the database.

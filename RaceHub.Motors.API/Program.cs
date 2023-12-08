@@ -4,7 +4,6 @@
 
 namespace RaceHub.Motors.API
 {
-    using Auth0.AspNetCore.Authentication;
     using Microsoft.EntityFrameworkCore;
     using RaceHub.Motors.API.DAL.Context;
     using RaceHub.Motors.API.DAL.Repository;

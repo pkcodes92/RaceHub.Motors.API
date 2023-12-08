@@ -12,23 +12,18 @@ namespace RaceHub.Motors.API.Controllers
     /// <summary>
     /// This controller will have methods that interact with the Vehicle Color entity.
     /// </summary>
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="VehicleColorController"/> class.
+    /// </remarks>
+    /// <param name="vehicleColorSvc">The vehicle color service injection.</param>
+    /// <param name="logger">The logging mechanism injection.</param>
     [ApiController]
     [Route("api/VehicleColor")]
-    public class VehicleColorController : ControllerBase
+    public class VehicleColorController(IVehicleColorService vehicleColorSvc, ILogger<VehicleColorController> logger) 
+        : ControllerBase
     {
-        private readonly IVehicleColorService vehicleColorSvc;
-        private readonly ILogger<VehicleColorController> logger;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="VehicleColorController"/> class.
-        /// </summary>
-        /// <param name="vehicleColorSvc">The vehicle color service injection.</param>
-        /// <param name="logger">The logging mechanism injection.</param>
-        public VehicleColorController(IVehicleColorService vehicleColorSvc, ILogger<VehicleColorController> logger)
-        {
-            this.vehicleColorSvc = vehicleColorSvc;
-            this.logger = logger;
-        }
+        private readonly IVehicleColorService vehicleColorSvc = vehicleColorSvc;
+        private readonly ILogger<VehicleColorController> logger = logger;
 
         /// <summary>
         /// This method will get all of the vehicle colors from the database.
