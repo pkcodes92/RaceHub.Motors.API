@@ -4,7 +4,6 @@
 
 namespace RaceHub.Motors.API.Controllers
 {
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using RaceHub.Motors.API.DTO.Request;
     using RaceHub.Motors.API.DTO.Response;
