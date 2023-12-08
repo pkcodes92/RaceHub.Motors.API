@@ -19,7 +19,7 @@ namespace RaceHub.Motors.API.Controllers
     /// <param name="drivetrainSvc">The drivetrain service injection.</param>
     [ApiController]
     [Route("api/Drivetrain")]
-    public class DrivetrainController(ILogger<DrivetrainController> logger, IDrivetrainService drivetrainSvc) 
+    public class DrivetrainController(ILogger<DrivetrainController> logger, IDrivetrainService drivetrainSvc)
         : ControllerBase
     {
         private readonly ILogger<DrivetrainController> logger = logger;
