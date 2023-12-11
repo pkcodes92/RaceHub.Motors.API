@@ -4,6 +4,7 @@
 
 namespace RaceHub.Motors.API.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using RaceHub.Motors.API.DTO.Request;
     using RaceHub.Motors.API.DTO.Response;
@@ -29,6 +30,7 @@ namespace RaceHub.Motors.API.Controllers
         /// This method will get all the drivetrains from the database.
         /// </summary>
         /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
+        [Authorize]
         [HttpGet("GetAllDrivetrains")]
         public async Task<ActionResult> GetAllDrivetrainsAsync()
         {
