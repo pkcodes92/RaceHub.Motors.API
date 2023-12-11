@@ -12,23 +12,18 @@ namespace RaceHub.Motors.API.Controllers
     /// <summary>
     /// This controller contains methods that will interact with the Engine UI entity.
     /// </summary>
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="EngineController"/> class.
+    /// </remarks>
+    /// <param name="logger">The logging mechanism injection.</param>
+    /// <param name="engineSvc">The engine service injection.</param>
     [ApiController]
     [Route("api/Engine")]
-    public class EngineController : ControllerBase
+    public class EngineController(ILogger<EngineController> logger, IEngineService engineSvc)
+        : ControllerBase
     {
-        private readonly ILogger<EngineController> logger;
-        private readonly IEngineService engineSvc;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="EngineController"/> class.
-        /// </summary>
-        /// <param name="logger">The logging mechanism injection.</param>
-        /// <param name="engineSvc">The engine service injection.</param>
-        public EngineController(ILogger<EngineController> logger, IEngineService engineSvc)
-        {
-            this.logger = logger;
-            this.engineSvc = engineSvc;
-        }
+        private readonly ILogger<EngineController> logger = logger;
+        private readonly IEngineService engineSvc = engineSvc;
 
         /// <summary>
         /// This method will get all of the engines from the database.

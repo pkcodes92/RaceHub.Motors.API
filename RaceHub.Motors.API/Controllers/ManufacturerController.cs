@@ -13,23 +13,18 @@ namespace RaceHub.Motors.API.Controllers
     /// <summary>
     /// This class implements methods that interact with the Manufacturer entity.
     /// </summary>
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="ManufacturerController"/> class.
+    /// </remarks>
+    /// <param name="manufacturerSvc">The manufacturer service injection.</param>
+    /// <param name="logger">The logging mechanism injection.</param>
     [ApiController]
     [Route("api/Manufacturer")]
-    public class ManufacturerController : ControllerBase
+    public class ManufacturerController(IManufacturerService manufacturerSvc, ILogger<ManufacturerController> logger)
+        : ControllerBase
     {
-        private readonly IManufacturerService manufacturerSvc;
-        private readonly ILogger<ManufacturerController> logger;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ManufacturerController"/> class.
-        /// </summary>
-        /// <param name="manufacturerSvc">The manufacturer service injection.</param>
-        /// <param name="logger">The logging mechanism injection.</param>
-        public ManufacturerController(IManufacturerService manufacturerSvc, ILogger<ManufacturerController> logger)
-        {
-            this.manufacturerSvc = manufacturerSvc;
-            this.logger = logger;
-        }
+        private readonly IManufacturerService manufacturerSvc = manufacturerSvc;
+        private readonly ILogger<ManufacturerController> logger = logger;
 
         /// <summary>
         /// This method gets all the manufacturers from the database.
