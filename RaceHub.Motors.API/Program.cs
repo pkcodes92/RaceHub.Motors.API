@@ -104,7 +104,7 @@ namespace RaceHub.Motors.API
             {
                 options.AddDefaultPolicy(policy =>
                 {
-                    policy.WithOrigins("https://localhost:4200").WithMethods("POST", "GET", "PUT", "DELETE").AllowAnyHeader();
+                    policy.WithOrigins("http://localhost:4200").WithMethods("POST", "GET", "PUT", "DELETE").AllowAnyHeader();
                 });
             });
 
