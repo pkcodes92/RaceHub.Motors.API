@@ -12,23 +12,18 @@ namespace RaceHub.Motors.API.Controllers
     /// <summary>
     /// This class contains methods that interact witht the Drivetrain UI entity.
     /// </summary>
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="DrivetrainController"/> class.
+    /// </remarks>
+    /// <param name="logger">The logging mechanism injection.</param>
+    /// <param name="drivetrainSvc">The drivetrain service injection.</param>
     [ApiController]
     [Route("api/Drivetrain")]
-    public class DrivetrainController : ControllerBase
+    public class DrivetrainController(ILogger<DrivetrainController> logger, IDrivetrainService drivetrainSvc)
+        : ControllerBase
     {
-        private readonly ILogger<DrivetrainController> logger;
-        private readonly IDrivetrainService drivetrainSvc;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DrivetrainController"/> class.
-        /// </summary>
-        /// <param name="logger">The logging mechanism injection.</param>
-        /// <param name="drivetrainSvc">The drivetrain service injection.</param>
-        public DrivetrainController(ILogger<DrivetrainController> logger, IDrivetrainService drivetrainSvc)
-        {
-            this.logger = logger;
-            this.drivetrainSvc = drivetrainSvc;
-        }
+        private readonly ILogger<DrivetrainController> logger = logger;
+        private readonly IDrivetrainService drivetrainSvc = drivetrainSvc;
 
         /// <summary>
         /// This method will get all the drivetrains from the database.
@@ -174,23 +169,23 @@ namespace RaceHub.Motors.API.Controllers
         /// <summary>
         /// This method will remove a drivetrain from the database.
         /// </summary>
-        /// <param name="drivetrainId">The primary key of the Drivetrain entity.</param>
+        /// <param name="id">The primary key of the Drivetrain entity.</param>
         /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
-        [HttpDelete("DeleteDrivetrain")]
-        public async Task<ActionResult> DeleteDrivetrainAsync(int drivetrainId)
+        [HttpDelete("RemoveDrivetrain")]
+        public async Task<ActionResult> DeleteDrivetrainAsync(int id)
         {
-            this.logger.LogInformation("Deleting the drivetrain with the primary key: {id}", drivetrainId);
+            this.logger.LogInformation("Deleting the drivetrain with the primary key: {id}", id);
             DeleteDrivetrainResponse apiResponse;
 
             try
             {
-                var result = await this.drivetrainSvc.DeleteDrivetrainAsync(drivetrainId);
+                var result = await this.drivetrainSvc.DeleteDrivetrainAsync(id);
 
                 if (result)
                 {
                     apiResponse = new DeleteDrivetrainResponse
                     {
-                        Id = drivetrainId,
+                        Id = id,
                         StatusCode = 204,
                         Success = true,
                     };
@@ -199,7 +194,7 @@ namespace RaceHub.Motors.API.Controllers
                 {
                     apiResponse = new DeleteDrivetrainResponse
                     {
-                        Id = drivetrainId,
+                        Id = id,
                         StatusCode = 503,
                         Success = false,
                     };
@@ -207,10 +202,10 @@ namespace RaceHub.Motors.API.Controllers
             }
             catch (Exception ex)
             {
-                this.logger.LogError(ex, "Error occurred while attempting to delete the drivetrain with the primary key: {id}", drivetrainId);
+                this.logger.LogError(ex, "Error occurred while attempting to delete the drivetrain with the primary key: {id}", id);
                 apiResponse = new DeleteDrivetrainResponse
                 {
-                    Id = drivetrainId,
+                    Id = id,
                     StatusCode = 500,
                     Success = false,
                 };

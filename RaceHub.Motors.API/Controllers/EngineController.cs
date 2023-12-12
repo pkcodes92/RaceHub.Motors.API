@@ -12,23 +12,18 @@ namespace RaceHub.Motors.API.Controllers
     /// <summary>
     /// This controller contains methods that will interact with the Engine UI entity.
     /// </summary>
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="EngineController"/> class.
+    /// </remarks>
+    /// <param name="logger">The logging mechanism injection.</param>
+    /// <param name="engineSvc">The engine service injection.</param>
     [ApiController]
     [Route("api/Engine")]
-    public class EngineController : ControllerBase
+    public class EngineController(ILogger<EngineController> logger, IEngineService engineSvc)
+        : ControllerBase
     {
-        private readonly ILogger<EngineController> logger;
-        private readonly IEngineService engineSvc;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="EngineController"/> class.
-        /// </summary>
-        /// <param name="logger">The logging mechanism injection.</param>
-        /// <param name="engineSvc">The engine service injection.</param>
-        public EngineController(ILogger<EngineController> logger, IEngineService engineSvc)
-        {
-            this.logger = logger;
-            this.engineSvc = engineSvc;
-        }
+        private readonly ILogger<EngineController> logger = logger;
+        private readonly IEngineService engineSvc = engineSvc;
 
         /// <summary>
         /// This method will get all of the engines from the database.
@@ -174,23 +169,23 @@ namespace RaceHub.Motors.API.Controllers
         /// <summary>
         /// This method will remove an engine from the database.
         /// </summary>
-        /// <param name="engineId">The primary key of the engine entity.</param>
+        /// <param name="id">The primary key of the engine entity.</param>
         /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
         [HttpDelete("RemoveEngine")]
-        public async Task<ActionResult> DeleteEngineAsync(int engineId)
+        public async Task<ActionResult> DeleteEngineAsync(int id)
         {
-            this.logger.LogInformation("Removing the engine with primary key: {engineId}", engineId);
+            this.logger.LogInformation("Removing the engine with primary key: {engineId}", id);
             DeleteEngineResponse apiResponse;
 
             try
             {
-                var result = await this.engineSvc.DeleteEngineAsync(engineId);
+                var result = await this.engineSvc.DeleteEngineAsync(id);
 
                 if (result)
                 {
                     apiResponse = new DeleteEngineResponse
                     {
-                        Id = engineId,
+                        Id = id,
                         StatusCode = 204,
                         Success = true,
                     };
@@ -199,7 +194,7 @@ namespace RaceHub.Motors.API.Controllers
                 {
                     apiResponse = new DeleteEngineResponse
                     {
-                        Id = engineId,
+                        Id = id,
                         StatusCode = 503,
                         Success = false,
                     };
@@ -207,11 +202,11 @@ namespace RaceHub.Motors.API.Controllers
             }
             catch (Exception ex)
             {
-                this.logger.LogError(ex, "Error occurred while deleting the Engine with the primary key: {engineId}", engineId);
+                this.logger.LogError(ex, "Error occurred while deleting the Engine with the primary key: {engineId}", id);
 
                 apiResponse = new DeleteEngineResponse
                 {
-                    Id = engineId,
+                    Id = id,
                     StatusCode = 500,
                     Success = false,
                 };

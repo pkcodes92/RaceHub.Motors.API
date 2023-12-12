@@ -47,5 +47,43 @@ namespace RaceHub.Motors.API.DAL.Repository
             var results = await this.context.VehicleColors.ToListAsync();
             return results!;
         }
+
+        /// <summary>
+        /// This method adds a new vehicle color to the database.
+        /// </summary>
+        /// <param name="vehicleColor">The new vehicle color being added to the database.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="VehicleColor"/>.</returns>
+        public async Task<VehicleColor> AddVehicleColorAsync(VehicleColor vehicleColor)
+        {
+            this.context.VehicleColors.Add(vehicleColor);
+            var result = await this.context.SaveChangesAsync();
+            return result > 0 ? vehicleColor : null!;
+        }
+
+        /// <summary>
+        /// This method updates a vehicle color in the database.
+        /// </summary>
+        /// <param name="vehicleColor">The vehicle color being updated in the database.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="VehicleColor"/>.</returns>
+        public async Task<VehicleColor> UpdateVehicleColorAsync(VehicleColor vehicleColor)
+        {
+            this.context.ChangeTracker.Clear();
+            this.context.VehicleColors.Update(vehicleColor);
+            var result = await this.context.SaveChangesAsync();
+            return result > 0 ? vehicleColor : null!;
+        }
+
+        /// <summary>
+        /// This method removes the vehicle color from the database.
+        /// </summary>
+        /// <param name="id">The primary key of the <see cref="VehicleColor"/> entity.</param>
+        /// <returns>A unit of execution that contains a boolean to represent successful deletion.</returns>
+        public async Task<bool> DeleteVehicleColorAsync(int id)
+        {
+            var vehicleColorToDelete = await this.context.VehicleColors.FirstOrDefaultAsync(g => g.Id == id);
+            this.context.VehicleColors.Remove(vehicleColorToDelete!);
+            var result = await this.context.SaveChangesAsync();
+            return result > 0;
+        }
     }
 }
