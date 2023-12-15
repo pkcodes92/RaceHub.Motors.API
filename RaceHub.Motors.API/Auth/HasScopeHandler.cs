@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
-
-namespace RaceHub.Motors.API.Auth
+﻿namespace RaceHub.Motors.API.Auth
 {
+    using Microsoft.AspNetCore.Authorization;
+
     public class HasScopeHandler : AuthorizationHandler<HasScopeRequirement>
     {
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, HasScopeRequirement requirement)
@@ -12,7 +12,7 @@ namespace RaceHub.Motors.API.Auth
             }
 
             // Split the scope strings into an array.
-            var scopes = context.User.FindFirst(c => c.Type == "scope" && c.Issuer == requirement.Issuer).Value.Split(' ');
+            var scopes = context.User.FindFirst(c => c.Type == "scope" && c.Issuer == requirement.Issuer)?.Value.Split(' ');
 
             // Succeed if the scope array contains the required scope
             if (scopes.Any(s => s == requirement.Scope))

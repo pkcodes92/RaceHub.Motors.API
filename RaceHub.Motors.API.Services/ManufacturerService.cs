@@ -5,6 +5,7 @@
 namespace RaceHub.Motors.API.Services
 {
     using RaceHub.Motors.API.DAL.Repository.Interfaces;
+    using RaceHub.Motors.API.DTO;
     using RaceHub.Motors.API.DTO.Models;
     using RaceHub.Motors.API.DTO.Request;
     using RaceHub.Motors.API.Services.Interfaces;
