@@ -80,6 +80,11 @@ namespace RaceHub.Motors.API.Services
             return results;
         }
 
+        /// <summary>
+        /// This method will get a single country by the country code.
+        /// </summary>
+        /// <param name="countryCode">The country code.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="Country"/>.</returns>
         public async Task<Country> GetCountryByCodeAsync(string countryCode)
         {
             var dbResults = await this.manufacturerRepo.GetAllManufacturersAsync();
