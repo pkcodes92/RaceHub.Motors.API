@@ -258,7 +258,7 @@ namespace RaceHub.Motors.API.Controllers
                     {
                         Id = id,
                         Success = true,
-                        StatusCode = 200,
+                        StatusCode = 204,
                     };
                 }
                 else
