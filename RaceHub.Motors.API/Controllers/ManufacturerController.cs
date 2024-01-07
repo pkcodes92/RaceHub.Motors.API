@@ -19,7 +19,7 @@ namespace RaceHub.Motors.API.Controllers
     /// <param name="manufacturerSvc">The manufacturer service injection.</param>
     /// <param name="logger">The logging mechanism injection.</param>
     [ApiController]
-    [Route("api/Manufacturer")]
+    [Route("api/[controller]")]
     public class ManufacturerController(IManufacturerService manufacturerSvc, ILogger<ManufacturerController> logger)
         : ControllerBase
     {

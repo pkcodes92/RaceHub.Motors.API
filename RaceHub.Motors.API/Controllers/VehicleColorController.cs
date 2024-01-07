@@ -18,7 +18,7 @@ namespace RaceHub.Motors.API.Controllers
     /// <param name="vehicleColorSvc">The vehicle color service injection.</param>
     /// <param name="logger">The logging mechanism injection.</param>
     [ApiController]
-    [Route("api/VehicleColor")]
+    [Route("api/[controller]")]
     public class VehicleColorController(IVehicleColorService vehicleColorSvc, ILogger<VehicleColorController> logger)
         : ControllerBase
     {

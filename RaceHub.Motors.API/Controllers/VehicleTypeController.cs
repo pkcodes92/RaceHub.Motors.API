@@ -16,7 +16,7 @@ namespace RaceHub.Motors.API.Controllers
     /// </remarks>
     /// <param name="vehicleTypeSvc">The vehicle type service injection.</param>
     /// <param name="logger">The logging mechanism injection.</param>
-    [Route("api/VehicleType")]
+    [Route("api/[controller]")]
     [ApiController]
     public class VehicleTypeController(IVehicleTypeService vehicleTypeSvc, ILogger<VehicleTypeController> logger)
         : ControllerBase
