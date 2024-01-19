@@ -182,7 +182,7 @@ namespace RaceHub.Motors.API.Controllers
                 apiResponse = new AddManufacturerResponse
                 {
                     Manufacturer = result,
-                    StatusCode = 200,
+                    StatusCode = 201,
                     Success = true,
                 };
             }
