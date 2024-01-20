@@ -74,7 +74,7 @@ namespace RaceHub.Motors.API
                     Description = "A simple .NET API that will be able to interact with a database.",
                 });
 
-                options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme()
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
                     Name = "Authorization",
                     Description = "Bearer Authentication with JWT Token",

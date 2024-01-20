@@ -18,7 +18,7 @@ namespace RaceHub.Motors.API.Controllers
     /// <param name="logger">The logging mechanism injection.</param>
     /// <param name="engineSvc">The engine service injection.</param>
     [ApiController]
-    [Route("api/Engine")]
+    [Route("api/[controller]")]
     public class EngineController(ILogger<EngineController> logger, IEngineService engineSvc)
         : ControllerBase
     {

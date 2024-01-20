@@ -13,18 +13,14 @@ namespace RaceHub.Motors.API.Services
     /// <summary>
     /// This class implements the methods in the <see cref="IManufacturerService"/>.
     /// </summary>
-    public class ManufacturerService : IManufacturerService
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="ManufacturerService"/> class.
+    /// </remarks>
+    /// <param name="manufacturerRepo">The manufacturer repository injection.</param>
+    public class ManufacturerService(IManufacturerRepository manufacturerRepo)
+        : IManufacturerService
     {
-        private readonly IManufacturerRepository manufacturerRepo;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ManufacturerService"/> class.
-        /// </summary>
-        /// <param name="manufacturerRepo">The manufacturer repository injection.</param>
-        public ManufacturerService(IManufacturerRepository manufacturerRepo)
-        {
-            this.manufacturerRepo = manufacturerRepo;
-        }
+        private readonly IManufacturerRepository manufacturerRepo = manufacturerRepo;
 
         /// <summary>
         /// This method will get all the manufacturers from the database.
