@@ -9,23 +9,15 @@ namespace RaceHub.Motors.API.Services
     using RaceHub.Motors.API.Services.Interfaces;
 
     /// <summary>
-    /// This class implements the methods defined in <see cref="IVehicleService"/>.
+    /// Initializes a new instance of the <see cref="VehicleService"/> class.
     /// </summary>
-    public class VehicleService : IVehicleService
+    /// <param name="vehicleRepo">The vehicle repository injection.</param>
+    /// <param name="manufacturerRepo">The manufacturer repository injection.</param>
+    public class VehicleService(IVehicleRepository vehicleRepo, IManufacturerRepository manufacturerRepo)
+        : IVehicleService
     {
-        private readonly IVehicleRepository vehicleRepo;
-        private readonly IManufacturerRepository manufacturerRepo;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="VehicleService"/> class.
-        /// </summary>
-        /// <param name="vehicleRepo">The vehicle repository injection.</param>
-        /// <param name="manufacturerRepo">The manufacturer repository injection.</param>
-        public VehicleService(IVehicleRepository vehicleRepo, IManufacturerRepository manufacturerRepo)
-        {
-            this.vehicleRepo = vehicleRepo;
-            this.manufacturerRepo = manufacturerRepo;
-        }
+        private readonly IVehicleRepository vehicleRepo = vehicleRepo;
+        private readonly IManufacturerRepository manufacturerRepo = manufacturerRepo;
 
         /// <summary>
         /// This method will get all the vehicles from the database.

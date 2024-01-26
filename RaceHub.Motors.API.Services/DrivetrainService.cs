@@ -10,20 +10,13 @@ namespace RaceHub.Motors.API.Services
     using RaceHub.Motors.API.Services.Interfaces;
 
     /// <summary>
-    /// This class implements the methods defined in <see cref="IDrivetrainService"/>.
+    /// Initializes a new instance of the <see cref="DrivetrainService"/> class.
     /// </summary>
-    public class DrivetrainService : IDrivetrainService
+    /// <param name="drivetrainRepo">The drivetrain repository injection.</param>
+    public class DrivetrainService(IDrivetrainRepository drivetrainRepo)
+        : IDrivetrainService
     {
-        private readonly IDrivetrainRepository drivetrainRepo;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DrivetrainService"/> class.
-        /// </summary>
-        /// <param name="drivetrainRepo">The drivetrain repository injection.</param>
-        public DrivetrainService(IDrivetrainRepository drivetrainRepo)
-        {
-            this.drivetrainRepo = drivetrainRepo;
-        }
+        private readonly IDrivetrainRepository drivetrainRepo = drivetrainRepo;
 
         /// <summary>
         /// This method implementation gets all of the drivetrains from the database.
