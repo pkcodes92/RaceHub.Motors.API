@@ -6,6 +6,7 @@ namespace RaceHub.Motors.API.Services
 {
     using RaceHub.Motors.API.DAL.Repository.Interfaces;
     using RaceHub.Motors.API.DTO.Models;
+    using RaceHub.Motors.API.DTO.Request;
     using RaceHub.Motors.API.Services.Interfaces;
 
     /// <summary>
@@ -16,6 +17,16 @@ namespace RaceHub.Motors.API.Services
         : IVehicleTypeService
     {
         private readonly IVehicleTypeRepository vehicleTypeRepo = vehicleTypeRepo;
+
+        public Task<VehicleType> AddVehicleTypeAsync(AddVehicleTypeRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteVehicleTypeAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// This method will return all the vehicle types from the database.
@@ -39,6 +50,21 @@ namespace RaceHub.Motors.API.Services
             }
 
             return results!;
+        }
+
+        public Task<VehicleType> GetVehicleTypeAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<VehicleType> GetVehicleTypeAsync(string code)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<VehicleType> UpdateVehicleTypeAsync(UpdateVehicleTypeRequest request)
+        {
+            throw new NotImplementedException();
         }
     }
 }
