@@ -176,6 +176,29 @@ namespace RaceHub.Motors.API.Controllers
             this.logger.LogInformation("Updating the vehicle type with the code: {code}", request.Code);
             UpdateVehicleTypeResponse apiResponse;
 
+            try
+            {
+                var result = await this.vehicleTypeSvc.UpdateVehicleTypeAsync(request);
+
+                apiResponse = new UpdateVehicleTypeResponse
+                {
+                    StatusCode = 200,
+                    Success = true,
+                    VehicleType = result,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error occurred while updating the vehicle type with the code: {code}", request.Code);
+
+                apiResponse = new UpdateVehicleTypeResponse
+                {
+                    StatusCode = 500,
+                    Success = true,
+                    VehicleType = null!,
+                };
+            }
+
             return this.Ok(apiResponse);
         }
     }
