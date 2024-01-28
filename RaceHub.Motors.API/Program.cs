@@ -4,13 +4,8 @@
 
 namespace RaceHub.Motors.API
 {
-    using System.Security.Claims;
-    using Microsoft.AspNetCore.Authentication.JwtBearer;
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.IdentityModel.Tokens;
     using Microsoft.OpenApi.Models;
-    using RaceHub.Motors.API.Auth;
     using RaceHub.Motors.API.DAL.Context;
     using RaceHub.Motors.API.DAL.Repository;
     using RaceHub.Motors.API.DAL.Repository.Interfaces;
@@ -28,8 +23,6 @@ namespace RaceHub.Motors.API
 
             // Add services to the container.
             builder.Services.AddControllers();
-
-            builder.Services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
 
             builder.Services.AddTransient<IEngineRepository, EngineRepository>();
             builder.Services.AddTransient<IDrivetrainRepository, DrivetrainRepository>();
