@@ -150,7 +150,7 @@ namespace RaceHub.Motors.API.Controllers
 
                 apiResponse = new AddVehicleTypeResponse
                 {
-                    StatusCode = 200,
+                    StatusCode = 201,
                     Success = true,
                     VehicleType = result,
                 };
