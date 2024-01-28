@@ -12,18 +12,14 @@ namespace RaceHub.Motors.API.DAL.Repository
     /// <summary>
     /// This class implements the methods defined in <see cref="IVehicleRepository"/>.
     /// </summary>
-    public class VehicleRepository : IVehicleRepository
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="VehicleRepository"/> class.
+    /// </remarks>
+    /// <param name="context">The database context injection.</param>
+    public class VehicleRepository(RaceHubMotorsContext context)
+        : IVehicleRepository
     {
-        private readonly RaceHubMotorsContext context;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="VehicleRepository"/> class.
-        /// </summary>
-        /// <param name="context">The database context injection.</param>
-        public VehicleRepository(RaceHubMotorsContext context)
-        {
-            this.context = context;
-        }
+        private readonly RaceHubMotorsContext context = context;
 
         /// <summary>
         /// This method returns all of the vehicles from the database.

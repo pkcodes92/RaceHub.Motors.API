@@ -10,20 +10,13 @@ namespace RaceHub.Motors.API.DAL.Repository
     using RaceHub.Motors.API.DAL.Repository.Interfaces;
 
     /// <summary>
-    /// This class implements the methods defined in <see cref="IDrivetrainRepository"/>.
+    /// Initializes a new instance of the <see cref="DrivetrainRepository"/> class.
     /// </summary>
-    public class DrivetrainRepository : IDrivetrainRepository
+    /// <param name="context">The database context injection.</param>
+    public class DrivetrainRepository(RaceHubMotorsContext context)
+        : IDrivetrainRepository
     {
-        private readonly RaceHubMotorsContext context;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DrivetrainRepository"/> class.
-        /// </summary>
-        /// <param name="context">The database context injection.</param>
-        public DrivetrainRepository(RaceHubMotorsContext context)
-        {
-            this.context = context;
-        }
+        private readonly RaceHubMotorsContext context = context;
 
         /// <summary>
         /// This method gets all of the drivetrains from the database.
