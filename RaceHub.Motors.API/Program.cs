@@ -29,24 +29,6 @@ namespace RaceHub.Motors.API
             // Add services to the container.
             builder.Services.AddControllers();
 
-            var domain = $"https://{builder.Configuration["Auth0:Domain"]}/";
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    options.Authority = domain;
-                    options.Audience = builder.Configuration["Auth0:Audience"];
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        NameClaimType = ClaimTypes.NameIdentifier,
-                        ValidateIssuer = false,
-                    };
-                });
-
-            builder.Services.AddAuthorization(options =>
-            {
-                options.AddPolicy("read:data", policy => policy.Requirements.Add(new HasScopeRequirement("read:data", domain)));
-            });
-
             builder.Services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
 
             builder.Services.AddTransient<IEngineRepository, EngineRepository>();
@@ -72,29 +54,6 @@ namespace RaceHub.Motors.API
                     Version = "v1",
                     Title = "RaceHub Motors API",
                     Description = "A simple .NET API that will be able to interact with a database.",
-                });
-
-                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
-                {
-                    Name = "Authorization",
-                    Description = "Bearer Authentication with JWT Token",
-                    Type = SecuritySchemeType.Http,
-                    Scheme = "bearer",
-                    BearerFormat = "JWT",
-                });
-
-                options.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                            {
-                                Id = "Bearer",
-                                Type = ReferenceType.SecurityScheme,
-                            },
-                        }, new List<string>()
-                    },
                 });
 
                 var xmlFileName = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
