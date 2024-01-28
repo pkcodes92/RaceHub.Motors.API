@@ -170,6 +170,11 @@ namespace RaceHub.Motors.API.Controllers
             return this.Ok(apiResponse);
         }
 
+        /// <summary>
+        /// This method will update an existing vehicle type in the database.
+        /// </summary>
+        /// <param name="request">The existing vehicle type information to be updated.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
         [HttpPut("UpdateVehicleType")]
         public async Task<ActionResult> UpdateVehicleTypeAsync(UpdateVehicleTypeRequest request)
         {
