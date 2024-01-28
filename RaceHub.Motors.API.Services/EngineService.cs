@@ -4,27 +4,18 @@
 
 namespace RaceHub.Motors.API.Services
 {
-    using RaceHub.Motors.API.DAL.Entity;
     using RaceHub.Motors.API.DAL.Repository.Interfaces;
-    using RaceHub.Motors.API.DTO.Models;
     using RaceHub.Motors.API.DTO.Request;
     using RaceHub.Motors.API.Services.Interfaces;
 
     /// <summary>
-    /// This class will implement all of the methods that are defined in <see cref="IEngineService"/>.
+    /// Initializes a new instance of the <see cref="EngineService"/> class.
     /// </summary>
-    public class EngineService : IEngineService
+    /// <param name="engineRepo">The engine repository injection.</param>
+    public class EngineService(IEngineRepository engineRepo)
+        : IEngineService
     {
-        private readonly IEngineRepository engineRepo;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="EngineService"/> class.
-        /// </summary>
-        /// <param name="engineRepo">The engine repository injection.</param>
-        public EngineService(IEngineRepository engineRepo)
-        {
-            this.engineRepo = engineRepo;
-        }
+        private readonly IEngineRepository engineRepo = engineRepo;
 
         /// <summary>
         /// This method will get all the engines from the database.

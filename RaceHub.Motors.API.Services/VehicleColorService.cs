@@ -10,20 +10,13 @@ namespace RaceHub.Motors.API.Services
     using RaceHub.Motors.API.Services.Interfaces;
 
     /// <summary>
-    /// This class will implement the methods defined in <see cref="IVehicleColorService"/>.
+    /// Initializes a new instance of the <see cref="VehicleColorService"/> class.
     /// </summary>
-    public class VehicleColorService : IVehicleColorService
+    /// <param name="vehicleColorRepo">The vehicle color repository injection.</param>
+    public class VehicleColorService(IVehicleColorRepository vehicleColorRepo)
+        : IVehicleColorService
     {
-        private readonly IVehicleColorRepository vehicleColorRepo;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="VehicleColorService"/> class.
-        /// </summary>
-        /// <param name="vehicleColorRepo">The vehicle color repository injection.</param>
-        public VehicleColorService(IVehicleColorRepository vehicleColorRepo)
-        {
-            this.vehicleColorRepo = vehicleColorRepo;
-        }
+        private readonly IVehicleColorRepository vehicleColorRepo = vehicleColorRepo;
 
         /// <summary>
         /// This method will get all of the vehicle colors from the database.
