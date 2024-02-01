@@ -11,17 +11,13 @@ namespace RaceHub.Motors.API.DAL.Context
     /// <summary>
     /// This class represents the necessary db context for dealing with authorization and authentication.
     /// </summary>
-    public class RaceHubMotorsIdentityContext : IdentityDbContext<IdentityUser, IdentityRole, string>
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="RaceHubMotorsIdentityContext"/> class.
+    /// </remarks>
+    /// <param name="options">The db context options.</param>
+    public class RaceHubMotorsIdentityContext(DbContextOptions<RaceHubMotorsIdentityContext> options)
+        : IdentityDbContext<IdentityUser, IdentityRole, string>(options)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RaceHubMotorsIdentityContext"/> class.
-        /// </summary>
-        /// <param name="options">The db context options.</param>
-        public RaceHubMotorsIdentityContext(DbContextOptions<RaceHubMotorsIdentityContext> options)
-            : base(options)
-        {
-        }
-
         /// <summary>
         /// This method will allow for the entities to be built and associated automatically at run time.
         /// </summary>
