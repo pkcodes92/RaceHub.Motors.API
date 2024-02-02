@@ -4,6 +4,7 @@
 
 namespace RaceHub.Motors.API
 {
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.OpenApi.Models;
     using RaceHub.Motors.API.DAL.Context;
@@ -61,10 +62,19 @@ namespace RaceHub.Motors.API
                 });
             });
 
+            builder.Services.AddDbContext<RaceHubMotorsIdentityContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration["ConnectionString"]);
+            });
+
             builder.Services.AddDbContext<RaceHubMotorsContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration["ConnectionString"]);
             });
+
+            builder.Services.AddAuthorization();
+
+            builder.Services.AddIdentityApiEndpoints<IdentityUser>().AddEntityFrameworkStores<RaceHubMotorsIdentityContext>();
 
             var app = builder.Build();
 
@@ -74,6 +84,8 @@ namespace RaceHub.Motors.API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.MapIdentityApi<IdentityUser>();
 
             app.UseHttpsRedirection();
 
