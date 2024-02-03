@@ -4,14 +4,16 @@
 
 namespace RaceHub.Motors.API
 {
-    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.IdentityModel.Tokens;
     using Microsoft.OpenApi.Models;
     using RaceHub.Motors.API.DAL.Context;
     using RaceHub.Motors.API.DAL.Repository;
     using RaceHub.Motors.API.DAL.Repository.Interfaces;
     using RaceHub.Motors.API.Services;
     using RaceHub.Motors.API.Services.Interfaces;
+    using System.Text;
 
     /// <summary>
     /// This class is the driver class for the API.
@@ -62,19 +64,28 @@ namespace RaceHub.Motors.API
                 });
             });
 
-            builder.Services.AddDbContext<RaceHubMotorsIdentityContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration["ConnectionString"]);
-            });
-
             builder.Services.AddDbContext<RaceHubMotorsContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration["ConnectionString"]);
             });
 
-            builder.Services.AddAuthorization();
+            var jwtIssuer = builder.Configuration["Jwt:Issuer"];
+            var jwtKey = builder.Configuration["Jwt:Key"];
 
-            builder.Services.AddIdentityApiEndpoints<IdentityUser>().AddEntityFrameworkStores<RaceHubMotorsIdentityContext>();
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer("Bearer", options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = jwtIssuer,
+                        ValidAudience = jwtIssuer,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey!)),
+                    };
+                });
 
             var app = builder.Build();
 
@@ -84,8 +95,6 @@ namespace RaceHub.Motors.API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
-            app.MapIdentityApi<IdentityUser>();
 
             app.UseHttpsRedirection();
 
