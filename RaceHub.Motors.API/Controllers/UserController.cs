@@ -7,6 +7,7 @@ namespace RaceHub.Motors.API.Controllers
     using System.IdentityModel.Tokens.Jwt;
     using System.Security.Claims;
     using System.Text;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.IdentityModel.Tokens;
     using RaceHub.Motors.API.DTO.Request;
@@ -23,7 +24,13 @@ namespace RaceHub.Motors.API.Controllers
     {
         private readonly IConfiguration configuration = configuration;
 
+        /// <summary>
+        /// This method will enable for the user to login into the system.
+        /// </summary>
+        /// <param name="request">The login request.</param>
+        /// <returns>A type of <see cref="ActionResult"/>.</returns>
         [HttpPost("Login")]
+        [AllowAnonymous]
         public ActionResult LoginAsync(LoginRequest request)
         {
             LoginResponse apiResponse;
