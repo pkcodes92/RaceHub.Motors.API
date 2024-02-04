@@ -18,8 +18,9 @@ namespace RaceHub.Motors.API.Controllers
     /// </summary>
     /// <param name="configuration">The configuration settings.</param>
     [ApiController]
+    [AllowAnonymous]
     [Route("api/[controller]")]
-    public class UserController(IConfiguration configuration)
+    public class UserController(IConfiguration configuration, IUserService userService)
         : ControllerBase
     {
         private readonly IConfiguration configuration = configuration;
@@ -30,7 +31,6 @@ namespace RaceHub.Motors.API.Controllers
         /// <param name="request">The login request.</param>
         /// <returns>A type of <see cref="ActionResult"/>.</returns>
         [HttpPost("Login")]
-        [AllowAnonymous]
         public ActionResult LoginAsync(LoginRequest request)
         {
             LoginResponse apiResponse;
