@@ -12,20 +12,13 @@ namespace RaceHub.Motors.API.DAL.Repository
     using RaceHub.Motors.API.DAL.Repository.Interfaces;
 
     /// <summary>
-    /// This class implements the methods defined in <see cref="IVehicleColorRepository"/>.
+    /// Initializes a new instance of the <see cref="VehicleColorRepository"/> class.
     /// </summary>
-    public class VehicleColorRepository : IVehicleColorRepository
+    /// <param name="context">The database context injection.</param>
+    public class VehicleColorRepository(RaceHubMotorsContext context)
+        : IVehicleColorRepository
     {
-        private readonly RaceHubMotorsContext context;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="VehicleColorRepository"/> class.
-        /// </summary>
-        /// <param name="context">The database context injection.</param>
-        public VehicleColorRepository(RaceHubMotorsContext context)
-        {
-            this.context = context;
-        }
+        private readonly RaceHubMotorsContext context = context;
 
         /// <summary>
         /// This method will get a single vehicle color by the ID.

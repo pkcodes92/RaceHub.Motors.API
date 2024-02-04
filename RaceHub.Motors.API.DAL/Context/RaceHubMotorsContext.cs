@@ -10,17 +10,13 @@ using RaceHub.Motors.API.DAL.Entity;
 /// <summary>
 /// This class defines the necessary database context.
 /// </summary>
-public partial class RaceHubMotorsContext : DbContext
+/// <remarks>
+/// Initializes a new instance of the <see cref="RaceHubMotorsContext"/> class.
+/// </remarks>
+/// <param name="options">The database context options.</param>
+public partial class RaceHubMotorsContext(DbContextOptions<RaceHubMotorsContext> options)
+    : DbContext(options)
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="RaceHubMotorsContext"/> class.
-    /// </summary>
-    /// <param name="options">The database context options.</param>
-    public RaceHubMotorsContext(DbContextOptions<RaceHubMotorsContext> options)
-        : base(options)
-    {
-    }
-
     /// <summary>
     /// Gets or sets the drivetrains.
     /// </summary>

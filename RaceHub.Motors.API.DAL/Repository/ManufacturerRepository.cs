@@ -10,20 +10,13 @@ namespace RaceHub.Motors.API.DAL.Repository
     using RaceHub.Motors.API.DAL.Repository.Interfaces;
 
     /// <summary>
-    /// This class implements methods defined in <see cref="IManufacturerRepository"/>.
+    /// Initializes a new instance of the <see cref="ManufacturerRepository"/> class.
     /// </summary>
-    public class ManufacturerRepository : IManufacturerRepository
+    /// <param name="context">The database context injection layer.</param>
+    public class ManufacturerRepository(RaceHubMotorsContext context)
+        : IManufacturerRepository
     {
-        private readonly RaceHubMotorsContext context;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ManufacturerRepository"/> class.
-        /// </summary>
-        /// <param name="context">The database context injection layer.</param>
-        public ManufacturerRepository(RaceHubMotorsContext context)
-        {
-            this.context = context;
-        }
+        private readonly RaceHubMotorsContext context = context;
 
         /// <summary>
         /// This method will return all of the manufacturers in the database.

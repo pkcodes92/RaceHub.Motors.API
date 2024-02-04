@@ -4,6 +4,8 @@
 
 namespace RaceHub.Motors.API.Controllers
 {
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using RaceHub.Motors.API.DTO;
     using RaceHub.Motors.API.DTO.Request;
@@ -19,6 +21,7 @@ namespace RaceHub.Motors.API.Controllers
     /// <param name="manufacturerSvc">The manufacturer service injection.</param>
     /// <param name="logger">The logging mechanism injection.</param>
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     public class ManufacturerController(IManufacturerService manufacturerSvc, ILogger<ManufacturerController> logger)
         : ControllerBase
