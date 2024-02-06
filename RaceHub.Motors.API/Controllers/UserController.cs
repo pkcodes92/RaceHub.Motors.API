@@ -34,9 +34,10 @@ namespace RaceHub.Motors.API.Controllers
         /// <param name="request">The login request.</param>
         /// <returns>A type of <see cref="ActionResult"/>.</returns>
         [HttpPost("Login")]
-        public ActionResult LoginAsync(LoginRequest request)
+        public async Task<ActionResult> LoginAsync(LoginRequest request)
         {
             LoginResponse apiResponse;
+            var user = await this.userSvc.GetUserByEmailAndPasswordAsync(request.Email, request.Password);
 
             if (request.Email == "test@test.com" && request.Password == "testPassword")
             {
@@ -83,5 +84,8 @@ namespace RaceHub.Motors.API.Controllers
 
             return this.Ok(apiResponse);
         }
+
+        [HttpPost("Register")]
+        public 
     }
 }
