@@ -12,18 +12,21 @@ namespace RaceHub.Motors.API.Controllers
     using Microsoft.IdentityModel.Tokens;
     using RaceHub.Motors.API.DTO.Request;
     using RaceHub.Motors.API.DTO.Response;
+    using RaceHub.Motors.API.Services.Interfaces;
 
     /// <summary>
     /// This class represents the necessary methods to log a user into the system.
     /// </summary>
     /// <param name="configuration">The configuration settings.</param>
+    /// <param name="userSvc">The user service injection.</param>
     [ApiController]
     [AllowAnonymous]
     [Route("api/[controller]")]
-    public class UserController(IConfiguration configuration, IUserService userService)
+    public class UserController(IConfiguration configuration, IUserService userSvc)
         : ControllerBase
     {
         private readonly IConfiguration configuration = configuration;
+        private readonly IUserService userSvc = userSvc;
 
         /// <summary>
         /// This method will enable for the user to login into the system.
