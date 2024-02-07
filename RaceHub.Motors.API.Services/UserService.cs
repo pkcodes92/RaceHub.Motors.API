@@ -19,34 +19,84 @@ namespace RaceHub.Motors.API.Services
     {
         private readonly IUserRepository userRepo = userRepo;
 
-        public Task<User> AddUserAsync(AddUserRequest request)
+        public async Task<User> AddUserAsync(AddUserRequest request)
         {
-            throw new NotImplementedException();
+            var userToAdd = new DAL.Entity.User
+            {
+                Created = DateTime.Now,
+                CreatedBy = request.AppName,
+                EmailAddress = request.Email,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                LastUpd = DateTime.Now,
+                LastUpdApp = request.AppName,
+                LastUpdBy = request.AppName,
+                Password = request.Password,
+                TypeId = 1,
+            };
+
+            var dbResult = await this.userRepo.AddUserAsync(userToAdd);
+
+            return new User
+            {
+                EmailAddress = dbResult.EmailAddress,
+                Password = dbResult.Password,
+            };
         }
 
-        public Task<User> GetUserByEmailAndPasswordAsync(string email, string password)
+        public async Task<User> GetUserByEmailAndPasswordAsync(string email, string password)
         {
-            throw new NotImplementedException();
+            var dbResult = await this.userRepo.GetUserByEmailAndPasswordAsync(email, password);
+            return new User
+            {
+                EmailAddress = dbResult.EmailAddress,
+                Password = dbResult.Password,
+            };
         }
 
-        public Task<User> GetUserByEmailAsync(string email)
+        public async Task<User> GetUserByEmailAsync(string email)
         {
-            throw new NotImplementedException();
+            var dbResult = await this.userRepo.GetUserByEmailAsync(email);
+
+            return new User
+            {
+                EmailAddress = dbResult.EmailAddress,
+                Password = dbResult.Password,
+            };
         }
 
-        public Task<User> GetUserByIdAdync(int id)
+        public async Task<User> GetUserByIdAdync(int id)
         {
-            throw new NotImplementedException();
+            var dbResult = await this.userRepo.GetUserByIdAsync(id);
+
+            return new User
+            {
+                Password = dbResult.Password,
+                EmailAddress = dbResult.EmailAddress,
+            };
         }
 
-        public Task<bool> RemoveUserAsync(int id)
+        public async Task<bool> RemoveUserAsync(int id)
         {
-            throw new NotImplementedException();
+            var result = await this.userRepo.RemoveUserAsync(id);
+            return result;
         }
 
-        public Task<User> UpdateUserAsync(UpdateUserRequest request)
+        public async Task<User> UpdateUserAsync(UpdateUserRequest request)
         {
-            throw new NotImplementedException();
+            var userToUpdate = await this.userRepo.GetUserByIdAsync(request.Id);
+
+            userToUpdate.LastUpd = DateTime.Now;
+            userToUpdate.LastUpdApp = request.AppName;
+            userToUpdate.LastUpdBy = request.AppName;
+
+            var dbResult = await this.userRepo.UpdateUserAsync(userToUpdate);
+
+            return new User
+            {
+                EmailAddress = dbResult.EmailAddress,
+                Password = dbResult.Password,
+            };
         }
     }
 }

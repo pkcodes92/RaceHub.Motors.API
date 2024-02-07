@@ -24,5 +24,14 @@ namespace RaceHub.Motors.API.DTO.Request
         /// </summary>
         [JsonProperty("password")]
         public string Password { get; set; }
+
+        [JsonProperty("firstName")]
+        public string FirstName { get; set; }
+
+        [JsonProperty("lastName")]
+        public string LastName { get; set; }
+
+        [JsonProperty("appName")]
+        public string AppName { get; set; }
     }
 }
