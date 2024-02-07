@@ -19,14 +19,16 @@ namespace RaceHub.Motors.API.Controllers
     /// </summary>
     /// <param name="configuration">The configuration settings.</param>
     /// <param name="userSvc">The user service injection.</param>
+    /// <param name="logger">The logging mechanism injection.</param>
     [ApiController]
     [AllowAnonymous]
     [Route("api/[controller]")]
-    public class UserController(IConfiguration configuration, IUserService userSvc)
+    public class UserController(IConfiguration configuration, IUserService userSvc, ILogger<UserController> logger)
         : ControllerBase
     {
         private readonly IConfiguration configuration = configuration;
         private readonly IUserService userSvc = userSvc;
+        private readonly ILogger<UserController> logger = logger;
 
         /// <summary>
         /// This method will enable for the user to login into the system.
@@ -39,7 +41,7 @@ namespace RaceHub.Motors.API.Controllers
             LoginResponse apiResponse;
             var user = await this.userSvc.GetUserByEmailAndPasswordAsync(request.Email, request.Password);
 
-            if (request.Email == "test@test.com" && request.Password == "testPassword")
+            if (request.Email == user.EmailAddress && request.Password == user.Password)
             {
                 var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.configuration["Jwt:Key"] !));
 
@@ -85,10 +87,41 @@ namespace RaceHub.Motors.API.Controllers
             return this.Ok(apiResponse);
         }
 
+        /// <summary>
+        /// This method will add a new user to the database accordingly.
+        /// </summary>
+        /// <param name="request">The new user being added accordingly.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
         [HttpPost("Register")]
         public async Task<ActionResult> RegisterAsync(AddUserRequest request)
         {
-            return this.Ok();
+            this.logger.LogInformation("Registering the new user: {email}", request.Email);
+            AddUserResponse apiResponse;
+
+            try
+            {
+                var result = await this.userSvc.AddUserAsync(request);
+
+                apiResponse = new AddUserResponse
+                {
+                    User = result,
+                    StatusCode = 201,
+                    Success = true,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error occurred when adding the user with the email: {email}", request.Email);
+
+                apiResponse = new AddUserResponse
+                {
+                    StatusCode = 500,
+                    Success = false,
+                    User = null!,
+                };
+            }
+
+            return this.Ok(apiResponse);
         }
     }
 }
