@@ -86,6 +86,9 @@ namespace RaceHub.Motors.API.Controllers
         }
 
         [HttpPost("Register")]
-        public 
+        public async Task<ActionResult> RegisterAsync(AddUserRequest request)
+        {
+            return this.Ok();
+        }
     }
 }
