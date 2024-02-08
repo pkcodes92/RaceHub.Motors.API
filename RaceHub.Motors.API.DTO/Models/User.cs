@@ -14,6 +14,24 @@ namespace RaceHub.Motors.API.DTO.Models
     public class User
     {
         /// <summary>
+        /// Gets or sets the primary key.
+        /// </summary>
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the first name.
+        /// </summary>
+        [JsonProperty("firstName")]
+        public string FirstName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the last name.
+        /// </summary>
+        [JsonProperty("lastName")]
+        public string LastName { get; set; }
+
+        /// <summary>
         /// Gets or sets the email address.
         /// </summary>
         [JsonProperty("emailAddress")]

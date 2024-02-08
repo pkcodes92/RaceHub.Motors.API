@@ -19,6 +19,11 @@ namespace RaceHub.Motors.API.Services
     {
         private readonly IUserRepository userRepo = userRepo;
 
+        /// <summary>
+        /// This method will add a new user to the database.
+        /// </summary>
+        /// <param name="request">The new user information being added.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="User"/>.</returns>
         public async Task<User> AddUserAsync(AddUserRequest request)
         {
             var userToAdd = new DAL.Entity.User
@@ -44,6 +49,12 @@ namespace RaceHub.Motors.API.Services
             };
         }
 
+        /// <summary>
+        /// This method will get a single user from the database.
+        /// </summary>
+        /// <param name="email">The email address of the user.</param>
+        /// <param name="password">The password of the user (unencrypted).</param>
+        /// <returns>A unit of execution that contains a type of <see cref="User"/>.</returns>
         public async Task<User> GetUserByEmailAndPasswordAsync(string email, string password)
         {
             var dbResult = await this.userRepo.GetUserByEmailAndPasswordAsync(email, password);
@@ -54,6 +65,11 @@ namespace RaceHub.Motors.API.Services
             };
         }
 
+        /// <summary>
+        /// This method will get a single user from the database.
+        /// </summary>
+        /// <param name="email">The email address of the user.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="User"/>.</returns>
         public async Task<User> GetUserByEmailAsync(string email)
         {
             var dbResult = await this.userRepo.GetUserByEmailAsync(email);
@@ -65,6 +81,11 @@ namespace RaceHub.Motors.API.Services
             };
         }
 
+        /// <summary>
+        /// This method will get a single user from the database.
+        /// </summary>
+        /// <param name="id">The primary key of the user entity.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="User"/>.</returns>
         public async Task<User> GetUserByIdAdync(int id)
         {
             var dbResult = await this.userRepo.GetUserByIdAsync(id);
@@ -76,12 +97,22 @@ namespace RaceHub.Motors.API.Services
             };
         }
 
+        /// <summary>
+        /// This method will remove a user from the database.
+        /// </summary>
+        /// <param name="id">The primary key of the user.</param>
+        /// <returns>A unit of execution that contains a boolean indicating successful deletion.</returns>
         public async Task<bool> RemoveUserAsync(int id)
         {
             var result = await this.userRepo.RemoveUserAsync(id);
             return result;
         }
 
+        /// <summary>
+        /// This method will update an existing user in the database.
+        /// </summary>
+        /// <param name="request">The user information being updated.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="User"/>.</returns>
         public async Task<User> UpdateUserAsync(UpdateUserRequest request)
         {
             var userToUpdate = await this.userRepo.GetUserByIdAsync(request.Id);
