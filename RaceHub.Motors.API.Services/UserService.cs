@@ -44,6 +44,9 @@ namespace RaceHub.Motors.API.Services
 
             return new User
             {
+                Id = dbResult.Id,
+                FirstName = dbResult.FirstName,
+                LastName = dbResult.LastName,
                 EmailAddress = dbResult.EmailAddress,
                 Password = dbResult.Password,
             };
@@ -60,6 +63,9 @@ namespace RaceHub.Motors.API.Services
             var dbResult = await this.userRepo.GetUserByEmailAndPasswordAsync(email, password);
             return new User
             {
+                Id = dbResult.Id,
+                FirstName = dbResult.FirstName,
+                LastName = dbResult.LastName,
                 EmailAddress = dbResult.EmailAddress,
                 Password = dbResult.Password,
             };
@@ -76,6 +82,9 @@ namespace RaceHub.Motors.API.Services
 
             return new User
             {
+                Id = dbResult.Id,
+                FirstName = dbResult.FirstName,
+                LastName = dbResult.LastName,
                 EmailAddress = dbResult.EmailAddress,
                 Password = dbResult.Password,
             };
@@ -92,6 +101,9 @@ namespace RaceHub.Motors.API.Services
 
             return new User
             {
+                Id = dbResult.Id,
+                FirstName = dbResult.FirstName,
+                LastName = dbResult.LastName,
                 Password = dbResult.Password,
                 EmailAddress = dbResult.EmailAddress,
             };
@@ -125,6 +137,9 @@ namespace RaceHub.Motors.API.Services
 
             return new User
             {
+                Id = dbResult.Id,
+                FirstName = dbResult.FirstName,
+                LastName = dbResult.LastName,
                 EmailAddress = dbResult.EmailAddress,
                 Password = dbResult.Password,
             };
