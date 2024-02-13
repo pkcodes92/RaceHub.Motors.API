@@ -42,5 +42,11 @@ namespace RaceHub.Motors.API.DTO.Models
         /// </summary>
         [JsonProperty("password")]
         public string Password { get; set; }
+
+        /// <summary>
+        /// Gets or sets the necessary user type.
+        /// </summary>
+        [JsonProperty("type")]
+        public string Type { get; set; }
     }
 }

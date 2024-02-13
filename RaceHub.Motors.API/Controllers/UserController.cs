@@ -50,8 +50,8 @@ namespace RaceHub.Motors.API.Controllers
                     Subject = new ClaimsIdentity(new[]
                     {
                         new Claim(ClaimTypes.Email, request.Email),
-                        new Claim(ClaimTypes.GivenName, "Test User"),
-                        new Claim(ClaimTypes.Role, "Admin"),
+                        new Claim(ClaimTypes.GivenName, $"{user.FirstName} {user.LastName}"),
+                        new Claim(ClaimTypes.Role, user.Type),
                     }),
                     Expires = DateTime.UtcNow.AddSeconds(3600),
                     NotBefore = null,
