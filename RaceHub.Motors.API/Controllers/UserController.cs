@@ -53,7 +53,7 @@ namespace RaceHub.Motors.API.Controllers
                         new Claim(ClaimTypes.GivenName, $"{user.FirstName} {user.LastName}"),
                         new Claim(ClaimTypes.Role, user.Type),
                     }),
-                    Expires = DateTime.UtcNow.AddSeconds(3600),
+                    Expires = DateTime.UtcNow.AddSeconds(3600), // This basically has the token expiring in 1 hour
                     NotBefore = null,
                     Audience = this.configuration["Jwt:Issuer"] !,
                     Issuer = this.configuration["Jwt:Issuer"] !,
