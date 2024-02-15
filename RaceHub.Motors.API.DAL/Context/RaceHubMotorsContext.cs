@@ -202,6 +202,20 @@ public partial class RaceHubMotorsContext(DbContextOptions<RaceHubMotorsContext>
             entity.Property(e => e.LastUpdBy).IsRequired().HasMaxLength(50).IsUnicode(false).HasDefaultValueSql("(suser_sname())");
         });
 
+        modelBuilder.Entity<UserType>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__UserType__3214EC07D99B68E5");
+
+            entity.ToTable("UserType", "dbo");
+
+            entity.Property(e => e.Description).IsRequired().HasMaxLength(50).IsUnicode(false);
+            entity.Property(e => e.Created).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.CreatedBy).IsRequired().HasMaxLength(50).IsUnicode().HasDefaultValueSql("(suser_sname())");
+            entity.Property(e => e.LastUpd).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.LastUpdApp).IsRequired().HasMaxLength(50).IsUnicode(false).HasDefaultValueSql("(app_name())");
+            entity.Property(e => e.LastUpdBy).IsRequired().HasMaxLength(50).IsUnicode(false).HasDefaultValueSql("(suser_sname())");
+        });
+
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__User__3214EC0768247E46");
