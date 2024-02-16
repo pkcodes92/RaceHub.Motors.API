@@ -34,6 +34,7 @@ namespace RaceHub.Motors.API
             builder.Services.AddTransient<IVehicleRepository, VehicleRepository>();
             builder.Services.AddTransient<IVehicleTypeRepository, VehicleTypeRepository>();
             builder.Services.AddTransient<IUserRepository, UserRepository>();
+            builder.Services.AddTransient<IUserTypeRepository, UserTypeRepository>();
 
             builder.Services.AddTransient<IEngineService, EngineService>();
             builder.Services.AddTransient<IDrivetrainService, DrivetrainService>();

@@ -53,6 +53,11 @@ public partial class RaceHubMotorsContext(DbContextOptions<RaceHubMotorsContext>
     public virtual DbSet<User> Users { get; set; }
 
     /// <summary>
+    /// Gets or sets the user types.
+    /// </summary>
+    public virtual DbSet<UserType> UserTypes { get; set; }
+
+    /// <summary>
     /// This method will bind the columns to the dotnet classes.
     /// </summary>
     /// <param name="modelBuilder">The model building middleware.</param>
