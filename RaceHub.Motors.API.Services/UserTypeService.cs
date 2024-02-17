@@ -8,6 +8,7 @@ namespace RaceHub.Motors.API.Services
     using RaceHub.Motors.API.DTO.Models;
     using RaceHub.Motors.API.DTO.Request;
     using RaceHub.Motors.API.Services.Interfaces;
+    using System.Collections.Generic;
 
     /// <summary>
     /// This class implements the methods defined in <see cref="IUserTypeService"/>.
@@ -73,6 +74,29 @@ namespace RaceHub.Motors.API.Services
                 Description = dbResult.Description,
                 Id = dbResult.Id,
             };
+        }
+
+        /// <summary>
+        /// This method will get all of the user types from the database.
+        /// </summary>
+        /// <returns>A unit of execution that contains a list of type <see cref="UserType"/>.</returns>
+        public async Task<List<UserType>> GetUserTypesAsync()
+        {
+            var dbResults = await this.userTypeRepo.GetUserTypesAsync();
+            var results = new List<UserType>();
+
+            foreach (var userType in dbResults)
+            {
+                var itemToAdd = new UserType
+                {
+                    Description = userType.Description,
+                    Id = userType.Id,
+                };
+
+                results.Add(itemToAdd);
+            }
+
+            return results!;
         }
 
         /// <summary>

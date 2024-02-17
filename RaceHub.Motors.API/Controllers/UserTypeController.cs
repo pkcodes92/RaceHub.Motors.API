@@ -132,5 +132,37 @@ namespace RaceHub.Motors.API.Controllers
 
             return this.Ok(apiResponse);
         }
+
+        [HttpGet("GetAllUserTypes")]
+        public async Task<ActionResult> GetAllUserTypesAsync()
+        {
+            this.logger.LogInformation("Getting all the user types");
+            GetUserTypesResponse apiResponse;
+
+            try
+            {
+                var results = await this.userTypeSvc.GetUserTypesAsync();
+
+                apiResponse = new GetUserTypesResponse
+                {
+                    Success = true,
+                    StatusCode = 200,
+                    UserTypes = results,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error occurred while getting the user types.");
+
+                apiResponse = new GetUserTypesResponse
+                {
+                    UserTypes = null!,
+                    StatusCode = 500,
+                    Success = false,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
     }
 }
