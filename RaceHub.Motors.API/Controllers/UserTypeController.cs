@@ -58,5 +58,69 @@ namespace RaceHub.Motors.API.Controllers
 
             return this.Ok(apiResponse);
         }
+
+        [HttpGet("GetUserType")]
+        public async Task<ActionResult> GetUserTypeByIdAsync(int id)
+        {
+            this.logger.LogInformation("Getting the user type with the ID: {id}", id);
+            GetUserTypeResponse apiResponse;
+
+            try
+            {
+                var result = await this.userTypeSvc.GetUserTypeByIdAsync(id);
+
+                apiResponse = new GetUserTypeResponse
+                {
+                    Success = true,
+                    UserType = result,
+                    StatusCode = 200,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error occurred while trying to get the user type with ID: {id}", id);
+
+                apiResponse = new GetUserTypeResponse
+                {
+                    UserType = null!,
+                    StatusCode = 500,
+                    Success = false,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
+
+        [HttpGet("GetUserTypeByDesc")]
+        public async Task<ActionResult> GetUserTypeByDescAsync(string description)
+        {
+            this.logger.LogInformation("Getting the user type with the description: {description}", description);
+            GetUserTypeResponse apiResponse;
+
+            try
+            {
+                var result = await this.userTypeSvc.GetUserTypeByDescription(description);
+
+                apiResponse = new GetUserTypeResponse
+                {
+                    Success = true,
+                    UserType = result,
+                    StatusCode = 200,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error occurred while trying to get the user type with the description: {description}", description);
+
+                apiResponse = new GetUserTypeResponse
+                {
+                    StatusCode = 500,
+                    Success = false,
+                    UserType = null!,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
     }
 }

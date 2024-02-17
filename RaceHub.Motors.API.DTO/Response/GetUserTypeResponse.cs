@@ -12,7 +12,7 @@ namespace RaceHub.Motors.API.DTO.Response
     /// <summary>
     /// This class represents the necessary model when getting a single user type.
     /// </summary>
-    public class GetUserTypeResponse
+    public class GetUserTypeResponse : ApiResponse
     {
         /// <summary>
         /// Gets or sets the single user type.
