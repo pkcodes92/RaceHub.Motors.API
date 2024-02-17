@@ -133,6 +133,10 @@ namespace RaceHub.Motors.API.Controllers
             return this.Ok(apiResponse);
         }
 
+        /// <summary>
+        /// This method will get all the user types from the database.
+        /// </summary>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
         [HttpGet("GetAllUserTypes")]
         public async Task<ActionResult> GetAllUserTypesAsync()
         {
@@ -159,6 +163,92 @@ namespace RaceHub.Motors.API.Controllers
                     UserTypes = null!,
                     StatusCode = 500,
                     Success = false,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
+
+        /// <summary>
+        /// This method will update an existing user type in the database.
+        /// </summary>
+        /// <param name="request">The updated user type information.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
+        [HttpPut("UpdateUserType")]
+        public async Task<ActionResult> UpdateUserTypeAsync(UpdateUserTypeRequest request)
+        {
+            this.logger.LogInformation("Updating the user type with the description: {description}", request.Description);
+            UpdateUserTypeResponse apiResponse;
+
+            try
+            {
+                var result = await this.userTypeSvc.UpdateUserTypeAsync(request);
+
+                apiResponse = new UpdateUserTypeResponse
+                {
+                    Success = true,
+                    StatusCode = 200,
+                    UserType = result,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error occurred when trying to update the user type with description: {description}", request.Description);
+
+                apiResponse = new UpdateUserTypeResponse
+                {
+                    Success = false,
+                    UserType = null!,
+                    StatusCode = 500,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
+
+        /// <summary>
+        /// This method will remove a user type from the database.
+        /// </summary>
+        /// <param name="id">The primary key of the user type entity.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
+        [HttpDelete("DeleteUserType")]
+        public async Task<ActionResult> DeleteUserTypeAsync(int id)
+        {
+            this.logger.LogInformation("Removing the user type with the ID: {id}", id);
+            DeleteUserTypeResponse apiResponse;
+
+            try
+            {
+                var result = await this.userTypeSvc.RemoveUserTypeAsync(id);
+
+                if (result)
+                {
+                    apiResponse = new DeleteUserTypeResponse
+                    {
+                        Success = true,
+                        StatusCode = 204,
+                        Id = id,
+                    };
+                }
+                else
+                {
+                    apiResponse = new DeleteUserTypeResponse
+                    {
+                        Success = false,
+                        StatusCode = 503,
+                        Id = id,
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error occurred while deleting the user type with ID: {id}", id);
+
+                apiResponse = new DeleteUserTypeResponse
+                {
+                    Success = false,
+                    StatusCode = 500,
+                    Id = id,
                 };
             }
 
