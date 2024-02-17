@@ -59,6 +59,11 @@ namespace RaceHub.Motors.API.Controllers
             return this.Ok(apiResponse);
         }
 
+        /// <summary>
+        /// This method will get a single user type from the database.
+        /// </summary>
+        /// <param name="id">The primary key of the user type entity.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
         [HttpGet("GetUserType")]
         public async Task<ActionResult> GetUserTypeByIdAsync(int id)
         {
@@ -91,6 +96,11 @@ namespace RaceHub.Motors.API.Controllers
             return this.Ok(apiResponse);
         }
 
+        /// <summary>
+        /// This method will get a single user type from the database.
+        /// </summary>
+        /// <param name="description">The description of the user type to search for.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
         [HttpGet("GetUserTypeByDesc")]
         public async Task<ActionResult> GetUserTypeByDescAsync(string description)
         {
