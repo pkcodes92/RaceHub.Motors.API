@@ -14,10 +14,12 @@ namespace RaceHub.Motors.API.Services
     /// This class contains the methods that will interact with the User entity.
     /// </summary>
     /// <param name="userRepo">The user repository injection.</param>
-    public class UserService(IUserRepository userRepo)
+    /// <param name="userTypeRepo">The user type repository injection.</param>
+    public class UserService(IUserRepository userRepo, IUserTypeRepository userTypeRepo)
         : IUserService
     {
         private readonly IUserRepository userRepo = userRepo;
+        private readonly IUserTypeRepository userTypeRepo = userTypeRepo;
 
         /// <summary>
         /// This method will add a new user to the database.
@@ -26,6 +28,8 @@ namespace RaceHub.Motors.API.Services
         /// <returns>A unit of execution that contains a type of <see cref="User"/>.</returns>
         public async Task<User> AddUserAsync(AddUserRequest request)
         {
+            var userType = await this.userTypeRepo.GetUserTypeByDescription(request.UserType);
+
             var userToAdd = new DAL.Entity.User
             {
                 Created = DateTime.Now,
@@ -37,7 +41,7 @@ namespace RaceHub.Motors.API.Services
                 LastUpdApp = request.AppName,
                 LastUpdBy = request.AppName,
                 Password = request.Password,
-                TypeId = 1,
+                TypeId = userType.Id,
             };
 
             var dbResult = await this.userRepo.AddUserAsync(userToAdd);
@@ -129,6 +133,7 @@ namespace RaceHub.Motors.API.Services
         {
             var userToUpdate = await this.userRepo.GetUserByIdAsync(request.Id);
 
+            userToUpdate.Password = request.UpdatedPassword;
             userToUpdate.LastUpd = DateTime.Now;
             userToUpdate.LastUpdApp = request.AppName;
             userToUpdate.LastUpdBy = request.AppName;
