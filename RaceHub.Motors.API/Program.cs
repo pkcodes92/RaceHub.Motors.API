@@ -43,6 +43,7 @@ namespace RaceHub.Motors.API
             builder.Services.AddTransient<IVehicleTypeService, VehicleTypeService>();
             builder.Services.AddTransient<IVehicleService, VehicleService>();
             builder.Services.AddTransient<IUserService, UserService>();
+            builder.Services.AddTransient<IUserTypeService, UserTypeService>();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
