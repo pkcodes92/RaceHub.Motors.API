@@ -4,6 +4,7 @@
 
 namespace RaceHub.Motors.API.Services
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using RaceHub.Motors.API.DAL.Repository.Interfaces;
     using RaceHub.Motors.API.DTO.Models;
@@ -54,6 +55,31 @@ namespace RaceHub.Motors.API.Services
                 EmailAddress = dbResult.EmailAddress,
                 Password = dbResult.Password,
             };
+        }
+
+        public async Task<List<User>> GetAllUsersAsync()
+        {
+            var dbResults = await this.userRepo.GetAllUsersAsync();
+            var results = new List<User>();
+
+            foreach (var user in dbResults)
+            {
+                var userType = await this.userTypeRepo.GetUserTypeByIdAsync(user.TypeId);
+
+                var userToAdd = new User
+                {
+                    Id = user.Id,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    EmailAddress = user.Email,
+                    Password = user.Password,
+                    Type = userType.Description,
+                };
+
+                results.Add(userToAdd);
+            }
+
+            return results;
         }
 
         /// <summary>

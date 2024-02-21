@@ -11,6 +11,8 @@ namespace RaceHub.Motors.API.DAL.Repository.Interfaces
     /// </summary>
     public interface IUserRepository
     {
+        Task<List<User>> GetAllUsersAsync();
+
         Task<User> AddUserAsync(User user);
 
         Task<User> UpdateUserAsync(User user);

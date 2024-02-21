@@ -20,6 +20,12 @@ namespace RaceHub.Motors.API.Services.Interfaces
         Task<User> AddUserAsync(AddUserRequest request);
 
         /// <summary>
+        /// This method definition will get all the users from the database.
+        /// </summary>
+        /// <returns>A unit of execution that contains a type of list that contains a type of <see cref="User"/>.</returns>
+        Task<List<User>> GetAllUsersAsync();
+
+        /// <summary>
         /// This method will get a single user from the database.
         /// </summary>
         /// <param name="id">The primary key of the user entity.</param>

@@ -87,6 +87,38 @@ namespace RaceHub.Motors.API.Controllers
             return this.Ok(apiResponse);
         }
 
+        [HttpGet("GetAllUsers")]
+        public async Task<ActionResult> GetAllUsersAsync()
+        {
+            this.logger.LogInformation("Getting all of the users");
+            GetUsersResponse apiResponse;
+
+            try
+            {
+                var results = await this.userSvc.GetAllUsersAsync();
+
+                apiResponse = new GetUsersResponse
+                {
+                    Users = results,
+                    StatusCode = 200,
+                    Success = true,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Error getting all the users from the database");
+
+                apiResponse = new GetUsersResponse
+                {
+                    Users = null!,
+                    StatusCode = 503,
+                    Success = false,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
+
         /// <summary>
         /// This method will add a new user to the database accordingly.
         /// </summary>

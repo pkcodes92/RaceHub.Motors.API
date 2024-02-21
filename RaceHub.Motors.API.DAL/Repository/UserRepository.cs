@@ -4,6 +4,7 @@
 
 namespace RaceHub.Motors.API.DAL.Repository
 {
+    using System.Collections.Generic;
     using Microsoft.EntityFrameworkCore;
     using RaceHub.Motors.API.DAL.Context;
     using RaceHub.Motors.API.DAL.Entity;
@@ -28,6 +29,16 @@ namespace RaceHub.Motors.API.DAL.Repository
             this.context.Users.Add(user);
             var result = await this.context.SaveChangesAsync();
             return result > 0 ? user : null!;
+        }
+
+        /// <summary>
+        /// This method implementation gets all the users from the database.
+        /// </summary>
+        /// <returns>A unit of execution that contains a list of type <see cref="User"/>.</returns>
+        public async Task<List<User>> GetAllUsersAsync()
+        {
+            var results = await this.context.Users.ToListAsync();
+            return results!;
         }
 
         /// <summary>
