@@ -7,9 +7,11 @@ namespace RaceHub.Motors.API.Controllers
     using System.IdentityModel.Tokens.Jwt;
     using System.Security.Claims;
     using System.Text;
+    using Azure.Core;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.IdentityModel.Tokens;
+    using RaceHub.Motors.API.DTO.Models;
     using RaceHub.Motors.API.DTO.Request;
     using RaceHub.Motors.API.DTO.Response;
     using RaceHub.Motors.API.Services.Interfaces;
@@ -43,27 +45,7 @@ namespace RaceHub.Motors.API.Controllers
 
             if (request.Email == user.Email && request.Password == user.Password)
             {
-                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.configuration["Jwt:Key"] !));
-
-                var tokenDescription = new SecurityTokenDescriptor
-                {
-                    Subject = new ClaimsIdentity(new[]
-                    {
-                        new Claim(ClaimTypes.Email, request.Email),
-                        new Claim(ClaimTypes.GivenName, $"{user.FirstName} {user.LastName}"),
-                        new Claim(ClaimTypes.Role, user.Type),
-                    }),
-                    Expires = DateTime.UtcNow.AddSeconds(3600), // This basically has the token expiring in 1 hour
-                    NotBefore = null,
-                    Audience = this.configuration["Jwt:Issuer"] !,
-                    Issuer = this.configuration["Jwt:Issuer"] !,
-                    SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256),
-                };
-
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var token = tokenHandler.CreateToken(tokenDescription);
-
-                var result = tokenHandler.WriteToken(token);
+                var result = this.GenerateToken(user);
 
                 apiResponse = new LoginResponse
                 {
@@ -71,6 +53,9 @@ namespace RaceHub.Motors.API.Controllers
                     StatusCode = 200,
                     Success = true,
                     Token = result,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    UserType = user.Type,
                 };
             }
             else
@@ -81,6 +66,9 @@ namespace RaceHub.Motors.API.Controllers
                     Success = false,
                     StatusCode = 500,
                     Email = request.Email,
+                    FirstName = null,
+                    LastName = null,
+                    UserType = null,
                 };
             }
 
@@ -158,6 +146,36 @@ namespace RaceHub.Motors.API.Controllers
             }
 
             return this.Ok(apiResponse);
+        }
+
+        private string GenerateToken(User user)
+        {
+            var jwtKey = this.configuration["Jwt:Key"];
+            var audience = this.configuration["Jwt:Issuer"];
+            var issuer = this.configuration["Jwt:Issuer"];
+
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey!));
+
+            var tokenDescription = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Email, user.Email),
+                    new Claim(ClaimTypes.GivenName, $"{user.FirstName} {user.LastName}"),
+                    new Claim(ClaimTypes.Role, user.Type),
+                }),
+                Expires = DateTime.UtcNow.AddSeconds(3600),
+                NotBefore = null,
+                Audience = audience!,
+                Issuer = issuer!,
+                SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256),
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var token = tokenHandler.CreateToken(tokenDescription);
+
+            var result = tokenHandler.WriteToken(token);
+            return result;
         }
     }
 }

@@ -94,14 +94,17 @@ namespace RaceHub.Motors.API.Services
         /// <returns>A unit of execution that contains a type of <see cref="User"/>.</returns>
         public async Task<User> GetUserByEmailAndPasswordAsync(string email, string password)
         {
-            var dbResult = await this.userRepo.GetUserByEmailAndPasswordAsync(email, password);
+            var dbUser = await this.userRepo.GetUserByEmailAndPasswordAsync(email, password);
+            var dbUserType = await this.userTypeRepo.GetUserTypeByIdAsync(dbUser.TypeId);
+
             return new User
             {
-                Id = dbResult.Id,
-                FirstName = dbResult.FirstName,
-                LastName = dbResult.LastName,
-                Email = dbResult.EmailAddress,
-                Password = dbResult.Password,
+                Id = dbUser.Id,
+                FirstName = dbUser.FirstName,
+                LastName = dbUser.LastName,
+                Email = dbUser.EmailAddress,
+                Password = dbUser.Password,
+                Type = dbUserType.Description,
             };
         }
 
