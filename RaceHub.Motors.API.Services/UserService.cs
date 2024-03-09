@@ -54,6 +54,7 @@ namespace RaceHub.Motors.API.Services
                 LastName = dbResult.LastName,
                 Email = dbResult.EmailAddress,
                 Password = dbResult.Password,
+                Type = userType.Description,
             };
         }
 
@@ -115,15 +116,17 @@ namespace RaceHub.Motors.API.Services
         /// <returns>A unit of execution that contains a type of <see cref="User"/>.</returns>
         public async Task<User> GetUserByEmailAsync(string email)
         {
-            var dbResult = await this.userRepo.GetUserByEmailAsync(email);
+            var dbUser = await this.userRepo.GetUserByEmailAsync(email);
+            var dbUserType = await this.userTypeRepo.GetUserTypeByIdAsync(dbUser.TypeId);
 
             return new User
             {
-                Id = dbResult.Id,
-                FirstName = dbResult.FirstName,
-                LastName = dbResult.LastName,
-                Email = dbResult.EmailAddress,
-                Password = dbResult.Password,
+                Id = dbUser.Id,
+                FirstName = dbUser.FirstName,
+                LastName = dbUser.LastName,
+                Email = dbUser.EmailAddress,
+                Password = dbUser.Password,
+                Type = dbUserType.Description,
             };
         }
 
@@ -134,15 +137,17 @@ namespace RaceHub.Motors.API.Services
         /// <returns>A unit of execution that contains a type of <see cref="User"/>.</returns>
         public async Task<User> GetUserByIdAdync(int id)
         {
-            var dbResult = await this.userRepo.GetUserByIdAsync(id);
+            var dbUser = await this.userRepo.GetUserByIdAsync(id);
+            var dbUserType = await this.userTypeRepo.GetUserTypeByIdAsync(dbUser.TypeId);
 
             return new User
             {
-                Id = dbResult.Id,
-                FirstName = dbResult.FirstName,
-                LastName = dbResult.LastName,
-                Password = dbResult.Password,
-                Email = dbResult.EmailAddress,
+                Id = dbUser.Id,
+                FirstName = dbUser.FirstName,
+                LastName = dbUser.LastName,
+                Password = dbUser.Password,
+                Email = dbUser.EmailAddress,
+                Type = dbUserType.Description,
             };
         }
 
@@ -171,15 +176,17 @@ namespace RaceHub.Motors.API.Services
             userToUpdate.LastUpdApp = request.AppName;
             userToUpdate.LastUpdBy = request.AppName;
 
-            var dbResult = await this.userRepo.UpdateUserAsync(userToUpdate);
+            var dbUser = await this.userRepo.UpdateUserAsync(userToUpdate);
+            var dbUserType = await this.userTypeRepo.GetUserTypeByIdAsync(dbUser.TypeId);
 
             return new User
             {
-                Id = dbResult.Id,
-                FirstName = dbResult.FirstName,
-                LastName = dbResult.LastName,
-                Email = dbResult.EmailAddress,
-                Password = dbResult.Password,
+                Id = dbUser.Id,
+                FirstName = dbUser.FirstName,
+                LastName = dbUser.LastName,
+                Email = dbUser.EmailAddress,
+                Password = dbUser.Password,
+                Type = dbUserType.Description,
             };
         }
     }
