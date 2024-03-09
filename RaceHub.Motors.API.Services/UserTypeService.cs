@@ -4,11 +4,11 @@
 
 namespace RaceHub.Motors.API.Services
 {
+    using System.Collections.Generic;
     using RaceHub.Motors.API.DAL.Repository.Interfaces;
     using RaceHub.Motors.API.DTO.Models;
     using RaceHub.Motors.API.DTO.Request;
     using RaceHub.Motors.API.Services.Interfaces;
-    using System.Collections.Generic;
 
     /// <summary>
     /// This class implements the methods defined in <see cref="IUserTypeService"/>.

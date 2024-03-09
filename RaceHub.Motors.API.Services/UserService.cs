@@ -52,11 +52,15 @@ namespace RaceHub.Motors.API.Services
                 Id = dbResult.Id,
                 FirstName = dbResult.FirstName,
                 LastName = dbResult.LastName,
-                EmailAddress = dbResult.EmailAddress,
+                Email = dbResult.EmailAddress,
                 Password = dbResult.Password,
             };
         }
 
+        /// <summary>
+        /// This method will get all of the users.
+        /// </summary>
+        /// <returns>A unit of execution that contains a list of type <see cref="User"/>.</returns>
         public async Task<List<User>> GetAllUsersAsync()
         {
             var dbResults = await this.userRepo.GetAllUsersAsync();
@@ -71,7 +75,7 @@ namespace RaceHub.Motors.API.Services
                     Id = user.Id,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
-                    EmailAddress = user.Email,
+                    Email = user.EmailAddress,
                     Password = user.Password,
                     Type = userType.Description,
                 };
@@ -96,7 +100,7 @@ namespace RaceHub.Motors.API.Services
                 Id = dbResult.Id,
                 FirstName = dbResult.FirstName,
                 LastName = dbResult.LastName,
-                EmailAddress = dbResult.EmailAddress,
+                Email = dbResult.EmailAddress,
                 Password = dbResult.Password,
             };
         }
@@ -115,7 +119,7 @@ namespace RaceHub.Motors.API.Services
                 Id = dbResult.Id,
                 FirstName = dbResult.FirstName,
                 LastName = dbResult.LastName,
-                EmailAddress = dbResult.EmailAddress,
+                Email = dbResult.EmailAddress,
                 Password = dbResult.Password,
             };
         }
@@ -135,7 +139,7 @@ namespace RaceHub.Motors.API.Services
                 FirstName = dbResult.FirstName,
                 LastName = dbResult.LastName,
                 Password = dbResult.Password,
-                EmailAddress = dbResult.EmailAddress,
+                Email = dbResult.EmailAddress,
             };
         }
 
@@ -171,7 +175,7 @@ namespace RaceHub.Motors.API.Services
                 Id = dbResult.Id,
                 FirstName = dbResult.FirstName,
                 LastName = dbResult.LastName,
-                EmailAddress = dbResult.EmailAddress,
+                Email = dbResult.EmailAddress,
                 Password = dbResult.Password,
             };
         }

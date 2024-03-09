@@ -41,7 +41,7 @@ namespace RaceHub.Motors.API.Controllers
             LoginResponse apiResponse;
             var user = await this.userSvc.GetUserByEmailAndPasswordAsync(request.Email, request.Password);
 
-            if (request.Email == user.EmailAddress && request.Password == user.Password)
+            if (request.Email == user.Email && request.Password == user.Password)
             {
                 var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.configuration["Jwt:Key"] !));
 
@@ -87,6 +87,10 @@ namespace RaceHub.Motors.API.Controllers
             return this.Ok(apiResponse);
         }
 
+        /// <summary>
+        /// This method will get all of the users from the database.
+        /// </summary>
+        /// <returns>A unit of execution that contains a type of <see cref="ActionResult"/>.</returns>
         [HttpGet("GetAllUsers")]
         public async Task<ActionResult> GetAllUsersAsync()
         {

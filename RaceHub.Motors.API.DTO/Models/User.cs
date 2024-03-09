@@ -34,8 +34,8 @@ namespace RaceHub.Motors.API.DTO.Models
         /// <summary>
         /// Gets or sets the email address.
         /// </summary>
-        [JsonProperty("emailAddress")]
-        public string EmailAddress { get; set; }
+        [JsonProperty("email")]
+        public string Email { get; set; }
 
         /// <summary>
         /// Gets or sets the password.
