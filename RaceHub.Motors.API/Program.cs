@@ -4,6 +4,7 @@
 
 namespace RaceHub.Motors.API
 {
+    using System.Text;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.IdentityModel.Tokens;
@@ -13,7 +14,6 @@ namespace RaceHub.Motors.API
     using RaceHub.Motors.API.DAL.Repository.Interfaces;
     using RaceHub.Motors.API.Services;
     using RaceHub.Motors.API.Services.Interfaces;
-    using System.Text;
 
     /// <summary>
     /// This class is the driver class for the API.
@@ -33,6 +33,8 @@ namespace RaceHub.Motors.API
             builder.Services.AddTransient<IManufacturerRepository, ManufacturerRepository>();
             builder.Services.AddTransient<IVehicleRepository, VehicleRepository>();
             builder.Services.AddTransient<IVehicleTypeRepository, VehicleTypeRepository>();
+            builder.Services.AddTransient<IUserRepository, UserRepository>();
+            builder.Services.AddTransient<IUserTypeRepository, UserTypeRepository>();
 
             builder.Services.AddTransient<IEngineService, EngineService>();
             builder.Services.AddTransient<IDrivetrainService, DrivetrainService>();
@@ -40,6 +42,8 @@ namespace RaceHub.Motors.API
             builder.Services.AddTransient<IManufacturerService, ManufacturerService>();
             builder.Services.AddTransient<IVehicleTypeService, VehicleTypeService>();
             builder.Services.AddTransient<IVehicleService, VehicleService>();
+            builder.Services.AddTransient<IUserService, UserService>();
+            builder.Services.AddTransient<IUserTypeService, UserTypeService>();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

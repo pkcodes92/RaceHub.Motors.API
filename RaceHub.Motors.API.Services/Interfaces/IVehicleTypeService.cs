@@ -32,8 +32,18 @@ namespace RaceHub.Motors.API.Services.Interfaces
         /// <returns>A unit of execution that contains the type of <see cref="VehicleType"/>.</returns>
         Task<VehicleType> GetVehicleTypeAsync(string code);
 
+        /// <summary>
+        /// This method definition will add a new vehicle type.
+        /// </summary>
+        /// <param name="request">The new vehicle type information to be added.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="VehicleType"/>.</returns>
         Task<VehicleType> AddVehicleTypeAsync(AddVehicleTypeRequest request);
 
+        /// <summary>
+        /// This method definition will update an existing vehicle type in the database.
+        /// </summary>
+        /// <param name="request">The vehicle type information to be updated.</param>
+        /// <returns>A unit of execution that contains a type of <see cref="VehicleType"/>.</returns>
         Task<VehicleType> UpdateVehicleTypeAsync(UpdateVehicleTypeRequest request);
 
         /// <summary>

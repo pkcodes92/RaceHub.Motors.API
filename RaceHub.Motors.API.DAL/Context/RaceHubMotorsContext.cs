@@ -48,6 +48,16 @@ public partial class RaceHubMotorsContext(DbContextOptions<RaceHubMotorsContext>
     public virtual DbSet<VehicleType> VehicleTypes { get; set; }
 
     /// <summary>
+    /// Gets or sets the users.
+    /// </summary>
+    public virtual DbSet<User> Users { get; set; }
+
+    /// <summary>
+    /// Gets or sets the user types.
+    /// </summary>
+    public virtual DbSet<UserType> UserTypes { get; set; }
+
+    /// <summary>
     /// This method will bind the columns to the dotnet classes.
     /// </summary>
     /// <param name="modelBuilder">The model building middleware.</param>
@@ -192,6 +202,38 @@ public partial class RaceHubMotorsContext(DbContextOptions<RaceHubMotorsContext>
             entity.Property(e => e.Created).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.CreatedBy).IsRequired().HasMaxLength(50).IsUnicode(false).HasDefaultValueSql("(suser_sname())");
             entity.Property(e => e.Description).IsRequired().HasMaxLength(50).IsUnicode(false);
+            entity.Property(e => e.LastUpd).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.LastUpdApp).IsRequired().HasMaxLength(50).IsUnicode(false).HasDefaultValueSql("(app_name())");
+            entity.Property(e => e.LastUpdBy).IsRequired().HasMaxLength(50).IsUnicode(false).HasDefaultValueSql("(suser_sname())");
+        });
+
+        modelBuilder.Entity<UserType>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__UserType__3214EC07D99B68E5");
+
+            entity.ToTable("UserType", "dbo");
+
+            entity.Property(e => e.Description).IsRequired().HasMaxLength(50).IsUnicode(false);
+            entity.Property(e => e.Created).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.CreatedBy).IsRequired().HasMaxLength(50).IsUnicode().HasDefaultValueSql("(suser_sname())");
+            entity.Property(e => e.LastUpd).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.LastUpdApp).IsRequired().HasMaxLength(50).IsUnicode(false).HasDefaultValueSql("(app_name())");
+            entity.Property(e => e.LastUpdBy).IsRequired().HasMaxLength(50).IsUnicode(false).HasDefaultValueSql("(suser_sname())");
+        });
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__User__3214EC0768247E46");
+
+            entity.ToTable("User", "dbo");
+
+            entity.Property(e => e.FirstName).IsRequired().HasMaxLength(20).IsUnicode(false);
+            entity.Property(e => e.LastName).IsRequired().HasMaxLength(50).IsUnicode(false);
+            entity.Property(e => e.EmailAddress).IsRequired().HasMaxLength(20).IsUnicode(false);
+            entity.Property(e => e.Password).IsRequired().HasMaxLength(20).IsUnicode(false);
+            entity.Property(e => e.TypeId).IsRequired();
+            entity.Property(e => e.Created).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.CreatedBy).IsRequired().HasMaxLength(50).IsUnicode(false).HasDefaultValueSql("(suser_sname())");
             entity.Property(e => e.LastUpd).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.LastUpdApp).IsRequired().HasMaxLength(50).IsUnicode(false).HasDefaultValueSql("(app_name())");
             entity.Property(e => e.LastUpdBy).IsRequired().HasMaxLength(50).IsUnicode(false).HasDefaultValueSql("(suser_sname())");
