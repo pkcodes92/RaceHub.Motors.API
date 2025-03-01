@@ -5,8 +5,6 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaceHub.Motors.API", "RaceHub.Motors.API\RaceHub.Motors.API.csproj", "{17BE5F3D-5B3D-40B4-9124-522DD4F4569E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaceHub.Motors.API.Services", "RaceHub.Motors.API.Services\RaceHub.Motors.API.Services.csproj", "{8108BC08-05A2-4E1F-B0D2-7E06F169BF55}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaceHub.Motors.API.DAL", "RaceHub.Motors.API.DAL\RaceHub.Motors.API.DAL.csproj", "{494A02AE-43B4-4F80-BD63-34F971BABDA7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaceHub.Motors.API.DTO", "RaceHub.Motors.API.DTO\RaceHub.Motors.API.DTO.csproj", "{90028620-18B6-4F53-8012-2C08C3A378C5}"
